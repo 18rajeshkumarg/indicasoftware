@@ -108,6 +108,37 @@ a.explore-services-cta {
   margin-block: clamp(0.35rem, 0.8vw, 0.65rem) !important;
 }
 
+/* Demoted section headings (see fix-pages.mjs). The export reused level-1
+   headings for several section headings, so a page could contain two or more
+   level-1 headings. The extras are turned into level-2 headings that carry the
+   `indica-h1-size` class for a correct outline; these rules pin the
+   `--heading-font-size` they previously inherited from the level-1 rule, so the
+   rendered size is unchanged on every breakpoint (2em on phones, 2.5em on wider
+   screens and in print). */
+h2.heading.indica-h1-size {
+  --heading-font-size: 2.5em;
+}
+html body .block-heading h2.heading.indica-h1-size {
+  --heading-font-size: 2em;
+}
+@media screen and (min-width: 30em) {
+  html body .block-heading h2.heading.indica-h1-size {
+    --heading-font-size: 2.5em;
+  }
+}
+@media print {
+  html body .block-heading h2.heading.indica-h1-size {
+    --heading-font-size: 2.5em;
+  }
+}
+/* Headings inside a card canvas use a different size source in the export. */
+html body .gml-card .gml-card__canvas h2.heading.indica-h1-size {
+  font-size: var(
+    --gml-font-size,
+    calc(var(--role-heading-1-pt) * var(--type-anchor, 1pt))
+  );
+}
+
 /* Pin the exported navbar overlay to the viewport on every page. The source
    wrapper is absolutely positioned, so sticky on its child cannot persist. */
 [data-navbar-editor="true"] {

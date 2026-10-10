@@ -25,6 +25,11 @@
  *      these rules).
  *  11. injects the small FAQ accordion script (marked `data-static-fix`, so
  *      step 1 keeps it) that opens/collapses the services page questions.
+ *  12. removes the stale placeholder media (`api/media.php?…`) that a static
+ *      host without the PHP endpoint would answer with a 404 on every load.
+ *  13. demotes the extra <h1> section headings to <h2> (pinning their size via
+ *      `indica-h1-size`) so every page has a single level-1 heading.
+ *  14. marks the exported navbar <div> as a navigation landmark.
  *
  * The script is idempotent: running it twice produces the same result.
  */
@@ -277,6 +282,74 @@ function stripGammaUi(html) {
   );
 }
 
+/** Remove the export's stale placeholder media (e.g. `api/media.php?…`). A
+ *  static host has no PHP endpoint, so the request would 404 on every load.
+ *  The live content is fetched from the API at runtime and the whole list is
+ *  replaced, so the sample image is dead weight regardless. */
+function stripStaticMediaImages(html) {
+  return html.replace(/<img\b[^>]*\bapi\/media\.php[^>]*>\s*/gi, "");
+}
+
+/** Mark a Gamma heading so static-fix.css can pin its original size. */
+function demoteHeadingTag(tag) {
+  let out = tag.replace(/^<h1\b/i, "<h2");
+  if (/\bclass="/i.test(out)) {
+    out = out.replace(/\sclass="([^"]*)"/i, (m, cls) =>
+      /\bindica-h1-size\b/.test(cls) ? m : ` class="${cls} indica-h1-size"`,
+    );
+  } else {
+    out = out.replace(/^<h2\b/i, '<h2 class="indica-h1-size"');
+  }
+  return out;
+}
+
+/** Keep the first <h1> as the page title and demote any further <h1> blocks to
+ *  <h2>. The export reused <h1> for section headings (e.g. "What Clients
+ *  Say?"), which produced several level-1 headings per page. The demoted
+ *  headings keep the `indica-h1-size` class so their rendered size does not
+ *  change (static-fix.css restores the `--heading-font-size` value). */
+function demoteExtraHeadings(html) {
+  const openRe = /<h1\b[^>]*>/gi;
+  let seenFirst = false;
+  let out = "";
+  let cursor = 0;
+  let match;
+  while ((match = openRe.exec(html))) {
+    if (!seenFirst) {
+      seenFirst = true;
+      continue;
+    }
+    const openStart = match.index;
+    const openEnd = openRe.lastIndex;
+    const closeStart = html.toLowerCase().indexOf("</h1>", openEnd);
+    if (closeStart < 0) continue;
+    out +=
+      html.slice(cursor, openStart) +
+      demoteHeadingTag(match[0]) +
+      html.slice(openEnd, closeStart) +
+      "</h2>";
+    cursor = closeStart + "</h1>".length;
+    openRe.lastIndex = cursor;
+  }
+  out += html.slice(cursor);
+  return out;
+}
+
+/** Give the exported navigation bar a real navigation landmark. The export
+ *  uses a plain <div>, so assistive tech sees no landmark at all. */
+function addNavLandmark(html) {
+  return html.replace(
+    /<div\b[^>]*\bdata-navbar-editor="true"[^>]*>/i,
+    (tag) =>
+      /\brole=/.test(tag)
+        ? tag
+        : tag.replace(
+            /^<div\b/i,
+            '<div role="navigation" aria-label="Main"',
+          ),
+  );
+}
+
 function fix(html, file) {
   const lineEnding = html.includes("\r\n") ? "\r\n" : "\n";
   const before = html.length;
@@ -287,6 +360,19 @@ function fix(html, file) {
   html = emptyCards.html;
   const emptyCaseStudyImages = removeEmptyCaseStudyImageCards(html);
   html = emptyCaseStudyImages.html;
+
+  // 1b. Stale placeholder media (no PHP endpoint on a static host → 404).
+  const staleMediaRemoved = (
+    html.match(/<img\b[^>]*\bapi\/media\.php/gi) ?? []
+  ).length;
+  html = stripStaticMediaImages(html);
+
+  // 1c. Correct the document outline: exactly one <h1> per page.
+  const demotedH1 = Math.max(0, (html.match(/<h1\b/gi) ?? []).length - 1);
+  html = demoteExtraHeadings(html);
+
+  // 1d. A real navigation landmark for assistive tech.
+  html = addNavLandmark(html);
 
   // 2. Shared Gamma stylesheets -> local vendor copy.
   html = html.replace(
@@ -487,6 +573,13 @@ function fix(html, file) {
     override: html.includes("data-static-fix") ? 1 : 0,
     emptyCardsRemoved: emptyCards.removed,
     emptyCaseStudyImageCardsRemoved: emptyCaseStudyImages.removed,
+    staleMediaRemoved,
+    demotedH1,
+    navLandmark: /<div\b[^>]*\brole="navigation"[^>]*\bdata-navbar-editor="true"/i.test(
+      html,
+    )
+      ? 1
+      : 0,
     // our own allowlisted script does not count as a leftover
     scripts: (
       html.match(/<script\b(?![^>]*\bdata-static-fix\b)/gi) ?? []
