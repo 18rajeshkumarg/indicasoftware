@@ -32,7 +32,7 @@ jobs:
         run: npm ci
       - name: Build website
         env:
-          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://indicasoftware-content-api-production.up.railway.app' }}
         run: npm run build
       - name: Exclude PHP files from the static Pages artifact
         run: rm -rf dist/api dist/admin && rm -f dist/bootstrap.php dist/.htaccess
