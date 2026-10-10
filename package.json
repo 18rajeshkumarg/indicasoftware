@@ -18,8 +18,10 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@vitejs/plugin-legacy": "^8.2.3",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "prettier": "latest"
+    "prettier": "latest",
+    "terser": "^5.51.2",
+    "vite": "latest"
   }
 }

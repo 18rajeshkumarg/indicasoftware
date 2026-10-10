@@ -12,6 +12,56 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Rendered only when scripting is unavailable (some feature-phone and
+         data-saver browsers). It links straight to the exported pages so the
+         content is still reachable without the app shell. -->
+    <noscript>
+      <style>
+        body {
+          margin: 0;
+          background: #0d0a2c;
+          color: #f5f3ff;
+          font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        }
+        .noscript-fallback {
+          max-width: 40rem;
+          margin: 0 auto;
+          padding: 2.5rem 1.5rem;
+        }
+        .noscript-fallback h1 {
+          margin: 0 0 0.5rem;
+          font-size: 1.75rem;
+        }
+        .noscript-fallback p {
+          line-height: 1.6;
+          opacity: 0.9;
+        }
+        .noscript-fallback ul {
+          padding-left: 1.25rem;
+          line-height: 2.1;
+        }
+        .noscript-fallback a {
+          color: #b3a4ff;
+        }
+      </style>
+      <div class="noscript-fallback">
+        <h1>Indica Software</h1>
+        <p>
+          This site works best with JavaScript enabled. You can still reach
+          every page directly with the links below.
+        </p>
+        <ul>
+          <li><a href="./pages/home/index.html">Home</a></li>
+          <li><a href="./pages/home/services.html">Services</a></li>
+          <li><a href="./pages/home/technologies.html">Technologies</a></li>
+          <li><a href="./pages/home/casestudies.html">Case Studies</a></li>
+          <li><a href="./pages/home/aboutus.html">About Us</a></li>
+          <li><a href="./pages/home/contactus.html">Contact Us</a></li>
+          <li><a href="./pages/home/getstarted.html">Get Started</a></li>
+          <li><a href="./pages/home/privacypolicy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

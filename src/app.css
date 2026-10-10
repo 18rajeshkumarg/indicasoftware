@@ -33,6 +33,10 @@ body {
 
 .app-frame {
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   display: block;
   width: 100%;
@@ -62,6 +66,10 @@ body {
 
 .app-status {
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   z-index: 2;
   display: flex;
