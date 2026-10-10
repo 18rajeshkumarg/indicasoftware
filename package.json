@@ -1,0 +1,25 @@
+{
+  "name": "indica-software",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node backend/copy-php.mjs",
+    "preview": "vite preview",
+    "backend:dev": "php -d upload_max_filesize=5M -d post_max_size=8M -S 127.0.0.1:8081 -t .",
+    "pages:vendor": "node vendor-css.mjs",
+    "pages:fix": "node fix-pages.mjs",
+    "pages:build": "node build-pages.mjs && prettier --write \"public/pages/**/*.html\" && node fix-pages.mjs && prettier --write \"public/pages/**/*.html\" && prettier --check \"public/pages/**/*.html\"",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "prettier": "latest"
+  }
+}

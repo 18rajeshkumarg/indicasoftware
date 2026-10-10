@@ -1,0 +1,631 @@
+/* ============================================================
+   Static-render fixes for the extracted Gamma pages.
+   ============================================================ */
+
+/* 1. The saved HTML is pretty-printed, but Gamma marks its text
+   containers as `white-space: pre-wrap`. The formatting's own
+   indentation would otherwise render as visible gaps and scatter
+   the layout, so let the browser wrap the text naturally. */
+[data-node-view-content],
+[data-node-view-content] *,
+.gml-heading__content,
+.gml-heading-text,
+.gml-text__content,
+[data-node-view-content-inner] {
+  white-space: normal !important;
+}
+
+/* 2. Gamma revealed these blocks with a runtime that was removed
+   along with its branding. Force them visible instead. */
+[class*="animatable-on-load"],
+[data-spotlight-parent] > *,
+.navbar-view-content {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Keep body copy readable and consistently aligned across page layouts. */
+.gml-paragraph__content,
+.gml-text__content {
+  box-sizing: border-box;
+  width: min(100%, 72ch);
+  margin-inline: auto;
+  line-height: 1.7;
+  text-align: start;
+  text-wrap: pretty;
+}
+.gml-heading__content {
+  max-inline-size: 100%;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Keep exported grid cells and their contents from forcing uneven columns. */
+[data-node-view-content-inner="gridCell"],
+[data-node-view-content-inner="cardLayoutItem"],
+[data-node-view-content-inner="smartLayout"] {
+  min-inline-size: 0;
+}
+[data-node-view-content-inner="gridCell"] img,
+[data-node-view-content-inner="cardLayoutItem"] img,
+[data-node-view-content-inner="smartLayout"] img {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+.gml-bullet,
+.gml-numbered {
+  min-inline-size: 0;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+/* Keep exported media and long text within their page columns. */
+.node-card img,
+.node-card video,
+.node-card iframe,
+.node-card table {
+  max-inline-size: 100%;
+}
+.node-card img {
+  block-size: auto;
+}
+.gml-paragraph__content,
+.gml-text__content,
+.gml-heading__content {
+  overflow-wrap: anywhere;
+}
+
+/* The Get Started page has one clear, centered primary action. */
+a.explore-services-cta {
+  display: flex !important;
+  width: fit-content !important;
+  max-width: min(100%, 20rem) !important;
+  margin: 1.25rem auto 0 !important;
+  text-align: center;
+}
+
+/* Center the homepage hero headline and its supporting copy as one unit. */
+.gml-heading[data-pos="76"] {
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.gml-heading[data-pos="76"] .gml-heading__content {
+  width: min(100%, 24ch) !important;
+  max-width: 24ch !important;
+  margin-inline: auto !important;
+  align-self: center !important;
+  text-align: center !important;
+  line-height: 1.12;
+}
+.gml-paragraph[data-pos="143"],
+.gml-paragraph[data-pos="143"] .gml-paragraph__content {
+  text-align: center !important;
+}
+
+/* Reduce the exported theme's stacked margins between top-level sections. */
+[data-node-view-content-inner="document"] > .node-card.block {
+  margin-block: clamp(0.35rem, 0.8vw, 0.65rem) !important;
+}
+
+/* Pin the exported navbar overlay to the viewport on every page. The source
+   wrapper is absolutely positioned, so sticky on its child cannot persist. */
+[data-navbar-editor="true"] {
+  position: fixed !important;
+  inset: 0 0 auto !important;
+  width: 100% !important;
+  z-index: 1002 !important;
+}
+.node-navbar {
+  position: relative !important;
+  top: auto !important;
+  z-index: 1002 !important;
+}
+
+/* Keep paired CTA controls separated, centered, and able to wrap on mobile. */
+.node-buttonGroup {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+}
+.node-buttonGroup > [data-node-view-wrapper] {
+  flex: 0 1 auto;
+  width: auto !important;
+  margin: 0 !important;
+}
+.node-buttonGroup a.chakra-button {
+  min-width: 10.5em;
+  justify-content: center;
+}
+
+/* Keep the shared footer connected to the page content and align its columns. */
+.node-card.last-block {
+  margin-block-start: clamp(1rem, 2.5vw, 1.75rem) !important;
+}
+.node-card.last-block .gml-card__body {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+.node-card.last-block [data-node-view-content-inner="grid"] {
+  column-gap: clamp(0.75rem, 2vw, 1.5rem) !important;
+  row-gap: clamp(0.75rem, 1.5vw, 1.25rem) !important;
+  align-items: start !important;
+}
+.node-card.last-block [data-node-view-content-inner="gridCell"] {
+  min-width: 0;
+}
+.node-card.last-block p {
+  margin-block: 0.4rem !important;
+  line-height: 1.7;
+}
+.node-card.last-block .node-gridLayout.last-block .grid-col-controls {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+.node-card.last-block .node-buttonGroup {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.65rem !important;
+}
+.node-card.last-block .node-buttonGroup > [data-node-view-wrapper] {
+  width: auto !important;
+  margin: 0 !important;
+}
+@media (max-width: 52rem) {
+  .node-card.last-block .node-gridLayout.last-block .grid-col-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 36rem) {
+  .node-card.last-block .node-gridLayout.last-block .grid-col-controls {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+@media (max-width: 38rem) {
+  .node-buttonGroup {
+    gap: 0.75rem !important;
+  }
+  .node-buttonGroup a.chakra-button {
+    min-width: min(100%, 12em);
+  }
+}
+
+/* 4. The Career Development Coaching heading links to Coming Soon. */
+a.career-link {
+  color: inherit;
+  text-decoration: none;
+}
+a.career-link:hover {
+  text-decoration: underline;
+}
+
+/* 5. FAQ accordions: stack answer content and rotate only the open icon. */
+.toggle {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.75rem;
+  width: 100%;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid rgba(129, 82, 225, 0.2);
+}
+.node-toggleSummary,
+.node-toggleSummary > [data-node-view-wrapper] {
+  width: 100%;
+}
+.node-toggleSummary .chakra-text {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.8rem;
+  width: 100%;
+  text-align: start;
+}
+.node-toggleSummary [data-node-view-content-inner="toggleSummary"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.toggle button[data-testid="toggle-button"] {
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.toggle button[data-testid="toggle-button"] svg {
+  transition: transform 0.2s ease;
+}
+.toggle[data-open="true"] button[data-testid="toggle-button"] svg {
+  transform: rotate(90deg);
+}
+button[data-testid="toggle-button"] {
+  cursor: pointer;
+}
+
+/* 6. Contact Details cards on contactus.html. */
+.indica-contact-details {
+  box-sizing: border-box;
+  width: min(100%, 52em);
+  margin: 2.25em auto 1.25em;
+  padding: clamp(1.5em, 4vw, 2.4em);
+  text-align: center;
+  border-radius: 1.35em;
+  background: linear-gradient(145deg, #fff, #f8f6fc 72%, #f3f9f5);
+  border: 1px solid rgba(49, 19, 108, 0.14);
+  box-shadow: 0 1em 2.5em -1.6em rgba(49, 19, 108, 0.48);
+}
+.indica-contact-title {
+  margin: 0 0 0.45em;
+  font-size: clamp(1.4em, 2.5vw, 1.75em);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #31136c;
+}
+.indica-contact-sub {
+  max-width: 34em;
+  margin: 0 auto 1.6em;
+  color: #4a4a68;
+  font-size: 1em;
+  line-height: 1.65;
+}
+.indica-contact-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1em;
+  max-width: 43em;
+  margin: 0 auto;
+}
+.indica-contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  min-width: 0;
+  min-height: 6.2em;
+  padding: 1.15em 1.25em;
+  border-radius: 1.05em;
+  background: #fff;
+  border: 1px solid rgba(49, 19, 108, 0.13);
+  box-shadow: 0 0.55em 1.3em -0.8em rgba(49, 19, 108, 0.5);
+  text-decoration: none !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.indica-contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0.9em 1.7em -0.7em rgba(37, 99, 235, 0.48);
+}
+.indica-contact-card:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 3px;
+}
+.indica-contact-label {
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #2563eb;
+}
+.indica-contact-value {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(0.95em, 1.8vw, 1.1em);
+  font-weight: 700;
+  color: #31136c;
+}
+.indica-contact-card:hover .indica-contact-value {
+  color: #16a34a;
+}
+@media (max-width: 38rem) {
+  .indica-contact-details {
+    margin-block: 1.6em 0.8em;
+    padding: 1.4em 1em;
+  }
+  .indica-contact-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75em;
+  }
+  .indica-contact-card {
+    min-height: 5.5em;
+  }
+}
+
+/* 7. Coming Soon page. */
+.indica-coming-cta {
+  text-align: center;
+  margin: 1.25em 0 1em;
+}
+
+/* Client-managed stories, reviews, and the project inquiry form. */
+.indica-managed-section {
+  display: block !important;
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+  position: relative !important;
+  z-index: 2 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-sizing: border-box;
+  width: min(100% - 2rem, 74rem);
+  margin: clamp(2.5rem, 7vw, 5rem) auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  color: #211a37;
+  border: 1px solid rgba(49, 19, 108, 0.13);
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, #ffffff, #f8f6fc 72%, #f3f9f5);
+  box-shadow: 0 1rem 2.5rem -2rem rgba(49, 19, 108, 0.5);
+}
+.indica-managed-section > h2 {
+  margin: 0 0 0.65rem;
+  color: #31136c;
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  line-height: 1.2;
+}
+.indica-managed-section > p {
+  max-width: 68ch;
+  margin: 0 0 1.5rem;
+  line-height: 1.7;
+}
+.indica-managed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.1rem;
+}
+.indica-home-case-list,
+.indica-home-testimonial-list {
+  width: 100%;
+  margin-block: 1rem;
+}
+.indica-managed-card {
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1.2rem;
+  border: 1px solid rgba(49, 19, 108, 0.12);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1.5rem -1.2rem rgba(49, 19, 108, 0.5);
+}
+.indica-managed-card h3 {
+  margin: 0 0 0.6rem;
+  color: #31136c;
+  font-size: 1.15rem;
+}
+.indica-managed-card > * {
+  min-width: 0;
+}
+.indica-managed-card p,
+.indica-managed-card li {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.indica-managed-card p:last-child {
+  margin-bottom: 0;
+}
+.indica-content-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 22rem;
+  margin: 0 0 1rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+.indica-stars {
+  color: #b76b00;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+}
+.indica-rating {
+  color: #544b63;
+  font-size: 0.9rem;
+}
+.indica-case-company {
+  color: #62596f;
+  font-size: 0.92rem;
+}
+.indica-managed-card a {
+  color: #31136c;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.indica-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.indica-inquiry form > label,
+.indica-form-grid > label {
+  display: grid;
+  gap: 0.45rem;
+  color: #31136c;
+  font-weight: 650;
+}
+.indica-inquiry input:not([type="checkbox"]),
+.indica-inquiry textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #cfc7dc;
+  border-radius: 0.65rem;
+  background: #fff;
+  color: #211a37;
+  font: inherit;
+}
+.indica-inquiry fieldset {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.55rem 1rem;
+  margin: 1.2rem 0;
+  padding: 1rem;
+  border: 1px solid #d8d1e2;
+  border-radius: 0.8rem;
+}
+.indica-inquiry legend {
+  padding: 0 0.35rem;
+  color: #31136c;
+  font-weight: 700;
+}
+.indica-service-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  line-height: 1.45;
+}
+.indica-service-option input {
+  margin-top: 0.25rem;
+  accent-color: #31136c;
+}
+.indica-query-label {
+  display: grid;
+  gap: 0.45rem;
+  color: #31136c;
+  font-weight: 650;
+}
+.indica-honeypot {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.indica-submit {
+  margin-top: 1rem;
+  padding: 0.8rem 1.4rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: linear-gradient(110deg, #31136c, #2563eb);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.indica-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.indica-form-status {
+  min-height: 1.5em;
+  margin: 0.8rem 0 0;
+  font-weight: 650;
+}
+.indica-form-status[data-state="error"] {
+  color: #a1223d;
+}
+.indica-form-status[data-state="success"] {
+  color: #187747;
+}
+@media (max-width: 38rem) {
+  .indica-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+a.indica-backhome {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7em 1.6em;
+  border-radius: 0.75em;
+  background: linear-gradient(135deg, #31136c, #2563eb);
+  color: #fff !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  box-shadow: 0 0.4em 1em -0.35em rgba(49, 19, 108, 0.6);
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+a.indica-backhome:hover,
+a.indica-backhome:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  text-decoration: none !important;
+}
+
+a.learn-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  min-height: 44px;
+  margin: 0.55rem 0;
+  padding: 0.68em 1.25em;
+  border: 1px solid rgba(49, 19, 108, 0.2);
+  border-radius: 999px;
+  background: linear-gradient(120deg, #31136c, #2563eb 62%, #16a34a);
+  box-shadow:
+    0 0.55rem 1.25rem -0.55rem rgba(49, 19, 108, 0.65),
+    inset 0 1px rgba(255, 255, 255, 0.22);
+  color: #fff !important;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none !important;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+a.learn-more-btn:hover {
+  color: #fff !important;
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 0.8rem 1.5rem -0.55rem rgba(49, 19, 108, 0.65);
+}
+a.learn-more-btn:focus-visible {
+  color: #fff !important;
+  outline: 3px solid rgba(37, 99, 235, 0.4);
+  outline-offset: 3px;
+}
+a.learn-more-btn:active {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  a.learn-more-btn {
+    transition: none;
+  }
+}
+
+/* WhatsApp contact CTA on the Side Hustle page. */
+a.whatsapp-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75em 1.35em;
+  border: 1px solid #128c50;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25d366, #128c50) !important;
+  box-shadow: 0 0.65rem 1.35rem -0.45rem rgba(18, 140, 80, 0.5);
+  color: #fff !important;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+a.whatsapp-cta-btn .chakra-text {
+  color: #fff !important;
+}
+a.whatsapp-cta-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 0.85rem 1.6rem -0.45rem rgba(18, 140, 80, 0.58);
+}
+a.whatsapp-cta-btn:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.45);
+  outline-offset: 3px;
+}
+a.whatsapp-cta-btn:active {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  a.whatsapp-cta-btn {
+    transition: none;
+  }
+}

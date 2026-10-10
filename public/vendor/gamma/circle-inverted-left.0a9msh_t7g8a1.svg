@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" preserveAspectRatio="none">
+    <defs>
+        <mask id="mask" maskContentUnits="objectBoundingBox">
+            <rect width="1" height="1" fill="white" />
+            <ellipse cx="2.03" cy="0.5" ry="1" rx="1.2" fill="black" />
+        </mask>
+    </defs>
+    <rect width="1" height="1" fill="white" mask="url(#mask)" />
+</svg>
