@@ -15,4 +15,7 @@ ENV INDICA_STORAGE_DIR=/var/data
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "mkdir -p \"$INDICA_STORAGE_DIR\" && chown -R www-data:www-data \"$INDICA_STORAGE_DIR\" && exec apache2-foreground"]
+COPY docker/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"]
