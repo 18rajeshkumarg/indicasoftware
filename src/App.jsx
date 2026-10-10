@@ -138,7 +138,13 @@ function renderCaseStudies(doc, root, items) {
   if (!list) return;
   list.replaceChildren();
   if (!items.length) {
-    list.append(textElement(doc, "p", "Client stories will appear here soon."));
+    list.append(
+      textElement(
+        doc,
+        "p",
+        "Case studies are being updated. Please check back soon.",
+      ),
+    );
     return;
   }
   for (const item of items) {
@@ -152,6 +158,7 @@ function renderCaseStudies(doc, root, items) {
       ).href;
       image.alt = `${item.company || "Client"} project`;
       image.loading = "lazy";
+      image.addEventListener("error", () => image.remove(), { once: true });
       card.append(image);
     }
     card.append(textElement(doc, "h3", item.title || item.company));
@@ -194,7 +201,13 @@ function renderTestimonials(doc, root, items) {
   }
   list.replaceChildren();
   if (!items.length) {
-    list.append(textElement(doc, "p", "Client reviews will appear here soon."));
+    list.append(
+      textElement(
+        doc,
+        "p",
+        "Client reviews are being updated. Please check back soon.",
+      ),
+    );
     return;
   }
   for (const item of items) {
@@ -223,10 +236,9 @@ function renderTestimonials(doc, root, items) {
 
 async function loadManagedContent(doc, route) {
   const requests = [];
-  // The HTML contains a server-rendered snapshot so the sections are visible
-  // immediately. Keep that snapshot in place if the API is temporarily
-  // unavailable; replacing it with an error/empty state made saved items look
-  // as though they had disappeared from the public page.
+  // Replace the static export snapshot with the current admin-published data.
+  // If the API is offline or not connected yet, clear the stale snapshot so
+  // old sample copy and broken uploaded-image paths are never left on screen.
   const fetchManagedItems = async (type) => {
     const url = apiUrl(`api/content.php?type=${encodeURIComponent(type)}`);
     // Always request the latest admin-published content, even when a browser
@@ -248,13 +260,13 @@ async function loadManagedContent(doc, route) {
     requests.push(
       fetchManagedItems("case-studies")
         .then((items) => renderCaseStudies(doc, caseRoot, items))
-        .catch(() => {}),
+        .catch(() => renderCaseStudies(doc, caseRoot, [])),
     );
   if (reviewRoot)
     requests.push(
       fetchManagedItems("testimonials")
         .then((items) => renderTestimonials(doc, reviewRoot, items))
-        .catch(() => {}),
+        .catch(() => renderTestimonials(doc, reviewRoot, [])),
     );
   if (route === "/contactus") {
     const form = doc.querySelector("[data-indica-inquiry-form]");
