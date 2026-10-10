@@ -29,14 +29,20 @@
  * The script is idempotent: running it twice produces the same result.
  */
 import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
-import { join, basename } from "node:path";
+import { join, basename, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = "C:/Users/asha g/Documents/Indica Software/public";
+const PROJECT_ROOT = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(PROJECT_ROOT, "public");
 
 const OVERRIDE_CSS = readFileSync(
-  "C:/Users/asha g/Documents/Indica Software/static-fix.css",
+  join(PROJECT_ROOT, "static-fix.css"),
   "utf8",
 ).trim();
+const INDENTED_OVERRIDE_CSS = OVERRIDE_CSS
+  .split(/\r?\n/)
+  .map((line) => (line ? `      ${line}` : ""))
+  .join("\n");
 
 const GAMMA_CSS_HOST =
   "https://assets.gammahosted.com/eswob8bki/_next/static/chunks/";
@@ -272,6 +278,7 @@ function stripGammaUi(html) {
 }
 
 function fix(html, file) {
+  const lineEnding = html.includes("\r\n") ? "\r\n" : "\n";
   const before = html.length;
 
   // 1. Scripts (Gamma runtime, analytics beacon, …).
@@ -380,11 +387,18 @@ function fix(html, file) {
   // 5e. Inert Gamma export helpers (no CSS or JS reads them).
   html = html.replace(/\s+data-export-(?:link|as-image)="[^"]*"/g, "");
 
+  // Give every saved page an explicit mobile viewport so browsers render at
+  // the device width instead of applying a desktop-layout scale.
+  html = html.replace(
+    /<meta\b(?=[^>]*\bname=["']viewport["'])[^>]*>/gi,
+    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />',
+  );
+
   // 6. Override stylesheet (idempotent and refreshed from static-fix.css).
   if (/<style\b[^>]*data-static-fix[^>]*>/i.test(html)) {
     html = html.replace(
       /<style\b([^>]*data-static-fix[^>]*)>[\s\S]*?<\/style>/i,
-      `<style$1>\n${OVERRIDE_CSS}\n    </style>`,
+      `<style$1>\n${INDENTED_OVERRIDE_CSS}\n    </style>`,
     );
   } else {
     html = html.replace(
@@ -479,7 +493,7 @@ function fix(html, file) {
     ).length,
   };
 
-  writeFileSync(file, html);
+  writeFileSync(file, html.replace(/\r?\n/g, lineEnding));
   return stats;
 }
 

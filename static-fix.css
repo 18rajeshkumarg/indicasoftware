@@ -629,3 +629,107 @@ a.whatsapp-cta-btn:active {
     transition: none;
   }
 }
+
+/* Make the exported pages fit real phone viewports. Their wide fixed grids
+   and desktop navbar otherwise overflow or shrink the page to desktop scale. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+@media (max-width: 44rem) {
+  body {
+    --doc-padding-top: 118px;
+  }
+  [data-navbar-editor="true"] {
+    padding-inline: 0.55rem !important;
+  }
+  .navbar-view-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.2rem !important;
+    width: 100% !important;
+  }
+  .navbar-view-content > a.chakra-link {
+    flex: 0 0 auto !important;
+    width: min(9rem, 42vw) !important;
+    height: auto !important;
+    aspect-ratio: 4.02;
+  }
+  [data-node-view-content-inner="navbar"] {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.15rem 0.35rem !important;
+    width: 100% !important;
+  }
+  .node-navbarLinks {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    min-width: 0;
+  }
+  .node-navbarLinks > [data-node-view-wrapper] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.1rem !important;
+    padding: 0 !important;
+  }
+  .node-navbarLinks .node-button,
+  .node-navbarButtons .node-button {
+    width: auto !important;
+    min-width: 0 !important;
+  }
+  .node-navbarLinks .node-button .button,
+  .node-navbarButtons .node-button .button {
+    min-height: 36px;
+    padding-inline: 0.5rem !important;
+    font-size: clamp(0.72rem, 3vw, 0.9rem) !important;
+    white-space: nowrap !important;
+  }
+  .node-navbarButtons {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+  [data-node-view-content-inner="document"] {
+    min-width: 0;
+    max-width: 100%;
+  }
+  [data-node-view-content-inner="grid"],
+  [data-node-view-content-inner="gridCell"],
+  [data-node-view-content-inner="cardLayoutItem"],
+  [data-node-view-content-inner="smartLayout"] {
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+  .node-card,
+  .gml-card__body {
+    max-width: 100%;
+  }
+  .node-card .gml-card__body {
+    padding-inline: clamp(0.8rem, 4vw, 1.5rem) !important;
+  }
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
