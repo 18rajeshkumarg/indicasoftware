@@ -10,6 +10,9 @@ RUN set -eux; \
     apache2ctl -M
 
 COPY backend/ /var/www/html/
+COPY backend/index.php /var/www/html/index.php
+
+RUN test -s /var/www/html/index.php && apache2ctl configtest
 
 ENV INDICA_STORAGE_DIR=/var/data
 
