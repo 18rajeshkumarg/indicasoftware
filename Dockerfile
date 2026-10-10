@@ -9,6 +9,8 @@ RUN set -eux; \
 
 COPY backend/ /var/www/html/
 
+ENV INDICA_STORAGE_DIR=/var/data
+
 EXPOSE 10000
 
 CMD ["sh", "-c", "mkdir -p \"$INDICA_STORAGE_DIR\" && chown -R www-data:www-data \"$INDICA_STORAGE_DIR\" && exec apache2-foreground"]
