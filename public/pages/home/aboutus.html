@@ -727,8 +727,28 @@
         max-width: 100%;
       }
       @media (max-width: 44rem) {
-        body {
-          --doc-padding-top: 118px;
+        /* The exported bar hard-codes a 75px height, but the phone layout stacks the
+           logo above two wrapped link rows (~133px tall). Let the bar size to its
+           content so the logo is not clipped off the top of the viewport. */
+        [data-navbar-editor="true"],
+        [data-navbar-editor="true"]
+          > .ProseMirror
+          > .node-navbar
+          > [data-node-view-wrapper]
+          > div {
+          height: auto !important;
+        }
+        [data-navbar-editor="true"]
+          > .ProseMirror
+          > .node-navbar
+          > [data-node-view-wrapper]
+          > div {
+          min-height: 75px !important;
+        }
+        /* `html body` outranks the exported `body` declaration later in the document,
+           so the page content still starts below the now-taller fixed bar. */
+        html body {
+          --doc-padding-top: 138px;
         }
         [data-navbar-editor="true"] {
           padding-inline: 0.55rem !important;
@@ -789,6 +809,18 @@
         [data-node-view-content-inner="document"] {
           min-width: 0;
           max-width: 100%;
+        }
+        /* Smart-layout rows place cards on an 18-track grid whose desktop column gaps
+           alone are wider than a phone screen. That collapsed every track to 0 and
+           pushed the trailing cards off the right edge, so stack the cards instead. */
+        .node-smartLayout .themed-shape-outside-text:not(.styled-grid-cell) {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 1.25rem !important;
+        }
+        .node-smartLayout .grid-item {
+          width: 100% !important;
+          max-width: 100% !important;
         }
         [data-node-view-content-inner="grid"],
         [data-node-view-content-inner="gridCell"],
