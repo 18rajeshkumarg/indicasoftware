@@ -45,6 +45,34 @@ function indica_json_response(array $payload, int $status = 200): never
     exit;
 }
 
+/** Allow same-origin API calls and explicitly configured public-site origins. */
+function indica_handle_cors(): void
+{
+    $origin = trim((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
+    if ($origin === '') return;
+
+    $originHost = strtolower((string) parse_url($origin, PHP_URL_HOST));
+    $requestHost = strtolower((string) parse_url('http://' . ($_SERVER['HTTP_HOST'] ?? ''), PHP_URL_HOST));
+    $configuredOrigins = getenv('INDICA_ALLOWED_ORIGINS') ?: 'https://18rajeshkumarg.github.io';
+    $allowedOrigins = array_filter(array_map('trim', explode(',', $configuredOrigins)));
+    $sameHost = $originHost !== '' && $originHost === $requestHost;
+    $explicitlyAllowed = in_array(strtolower($origin), array_map('strtolower', $allowedOrigins), true);
+
+    if (!$sameHost && !$explicitlyAllowed) {
+        indica_json_response(['error' => 'Request origin is not allowed.'], 403);
+    }
+
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Vary: Origin');
+    if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Access-Control-Max-Age: 600');
+        http_response_code(204);
+        exit;
+    }
+}
+
 function indica_read_json(string $filename, array $fallback): array
 {
     $path = indica_storage_dir() . DIRECTORY_SEPARATOR . $filename;

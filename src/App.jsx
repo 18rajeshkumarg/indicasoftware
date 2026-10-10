@@ -118,6 +118,10 @@ function srcFor(route) {
 }
 
 function apiUrl(path) {
+  const apiBase = import.meta.env.VITE_API_BASE_URL?.trim();
+  if (apiBase) {
+    return new URL(path.replace(/^\//, ""), `${apiBase.replace(/\/+$/, "")}/`);
+  }
   const base = import.meta.env.BASE_URL || "/";
   return new URL(`${base}${path.replace(/^\//, "")}`, window.location.href);
 }

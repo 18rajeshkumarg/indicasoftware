@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: indicasoftware-content-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: 0.5c-512mb
+    healthCheckPath: /api/content.php?type=case-studies
+    disk:
+      name: content-storage
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: INDICA_STORAGE_DIR
+        value: /var/data
+      - key: INDICA_ALLOWED_ORIGINS
+        value: https://18rajeshkumarg.github.io
+      - key: INDICA_ADMIN_USERNAME
+        sync: false
+      - key: INDICA_ADMIN_PASSWORD_HASH
+        sync: false

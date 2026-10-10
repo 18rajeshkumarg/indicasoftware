@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require dirname(__DIR__) . '/bootstrap.php';
+indica_handle_cors();
 
 $name = (string) ($_GET['name'] ?? '');
 if (!preg_match('/^[a-f0-9]{32}\.(?:jpg|png|webp)$/', $name)) {

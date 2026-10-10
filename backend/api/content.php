@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require dirname(__DIR__) . '/bootstrap.php';
+indica_handle_cors();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     header('Allow: GET');

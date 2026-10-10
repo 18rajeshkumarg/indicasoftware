@@ -1,16 +1,11 @@
 <?php
 declare(strict_types=1);
 require dirname(__DIR__) . '/bootstrap.php';
+indica_handle_cors();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Allow: POST');
     indica_json_response(['error' => 'Method not allowed.'], 405);
-}
-
-$origin = (string) ($_SERVER['HTTP_ORIGIN'] ?? '');
-$host = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
-if ($origin !== '' && strtolower((string) parse_url($origin, PHP_URL_HOST)) !== preg_replace('/:\d+$/', '', $host)) {
-    indica_json_response(['error' => 'Request origin is not allowed.'], 403);
 }
 
 $input = str_contains(strtolower((string) ($_SERVER['CONTENT_TYPE'] ?? '')), 'application/json')

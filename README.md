@@ -270,3 +270,9 @@ scroll restoration, the not-found panel and cold-start timing.
 ## GitHub Pages deployment
 
 The GitHub Actions workflow in `.github/workflows/pages.yml` builds and deploys the static website whenever `main` is updated. GitHub Pages cannot execute PHP, so that deployment omits the PHP endpoints. The admin panel, live content updates, and inquiry submissions need a separate PHP-capable host, configured as described above.
+
+## Deploying the PHP admin and inquiry API on Render
+
+`render.yaml` and `Dockerfile` define the PHP API as a Render web service with a persistent disk for case studies, review data, inquiry records, and uploaded images. Create it from the Render dashboard with **New > Blueprint** and select this public repository. Render will prompt you for `INDICA_ADMIN_USERNAME` and `INDICA_ADMIN_PASSWORD_HASH`; generate the password hash locally with `php -r "echo password_hash('your-long-password', PASSWORD_DEFAULT);"` and enter it only in Render's secret prompt. Do not commit the hash or storage data.
+
+The service uses a paid compute plan and a persistent disk because free Render web services do not retain local files. Render lists persistent disks at $0.25 per GB per month, in addition to compute charges. Once the service is deployed, set the GitHub repository Actions variable `VITE_API_BASE_URL` to its HTTPS URL, then run the `Deploy website to GitHub Pages` workflow again. The admin will be available at `<service-url>/admin/`.
