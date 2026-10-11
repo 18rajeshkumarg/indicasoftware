@@ -94,7 +94,7 @@ const SOCIAL_LINKS = [
 
 function ChatIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-bubble__chat-icon">
       <path d="M12 2C6.486 2 2 5.589 2 10c0 2.387 1.24 4.51 3.2 5.925-.13 1.056-.55 2.686-1.55 3.575 0 0 1.86-.14 3.53-1.34C8.42 18.71 10.14 19 12 19c5.514 0 10-3.589 10-8s-4.486-8-10-8zm-4 9a1.25 1.25 0 1 1 0-2.5A1.25 1.25 0 0 1 8 11zm4 0a1.25 1.25 0 1 1 0-2.5A1.25 1.25 0 0 1 12 11zm4 0a1.25 1.25 0 1 1 0-2.5A1.25 1.25 0 0 1 16 11z" />
     </svg>
   );

@@ -300,7 +300,57 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .social-bubble__list,
   .social-bubble__link,
-  .social-bubble__toggle {
+  .social-bubble__toggle,
+  .social-bubble__chat-icon {
     transition: none;
+    animation: none;
   }
+}
+
+/* Animated social media icon for the toggle button */
+.social-bubble__chat-icon {
+  animation: socialPulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes socialPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.15);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+/* Subtle floating animation for the entire toggle button */
+.social-bubble__toggle {
+  animation: socialFloat 3s ease-in-out infinite;
+}
+
+@keyframes socialFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Pause animations on hover for better UX */
+.social-bubble__toggle:hover .social-bubble__chat-icon,
+.social-bubble__toggle:hover {
+  animation-play-state: paused;
+}
+
+.social-bubble__toggle:hover {
+  transform: translateY(-3px) scale(1.05);
 }
