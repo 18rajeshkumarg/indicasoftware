@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import SocialBubble from "./SocialBubble";
 
 /**
  * Route table.
@@ -640,6 +641,8 @@ export default function App() {
           </button>
         </div>
       )}
+
+      <SocialBubble />
     </div>
   );
 }
