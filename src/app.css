@@ -314,7 +314,8 @@ body {
 }
 
 @keyframes socialPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   15% {
@@ -337,7 +338,8 @@ body {
 }
 
 @keyframes socialFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

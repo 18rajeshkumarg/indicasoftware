@@ -153,14 +153,23 @@ const txt = (s) =>
 
 const esc = (s) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const escAttr = (s) => esc(String(s ?? "")).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+const escAttr = (s) =>
+  esc(String(s ?? ""))
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
-const CONTENT_STORAGE = process.env.INDICA_STORAGE_DIR || path.resolve(ROOT, "..", "indica-private-storage");
+const CONTENT_STORAGE =
+  process.env.INDICA_STORAGE_DIR ||
+  path.resolve(ROOT, "..", "indica-private-storage");
 function readPublishedContent(key) {
   try {
-    const data = JSON.parse(readFileSync(path.join(CONTENT_STORAGE, "content.json"), "utf8"));
+    const data = JSON.parse(
+      readFileSync(path.join(CONTENT_STORAGE, "content.json"), "utf8"),
+    );
     return Array.isArray(data[key])
-      ? data[key].filter((item) => item && typeof item === "object" && item.published === true)
+      ? data[key].filter(
+          (item) => item && typeof item === "object" && item.published === true,
+        )
       : [];
   } catch {
     return [];
@@ -171,32 +180,39 @@ const PUBLISHED_CASE_STUDIES = readPublishedContent("case_studies");
 const PUBLISHED_REVIEWS = readPublishedContent("testimonials");
 
 function caseStudyCards(items) {
-  return items.map((item) => {
-    const company = String(item.company || "Client");
-    const image = item.image
-      ? `<img class="indica-content-image" src="../../api/media.php?name=${encodeURIComponent(String(item.image))}" alt="${escAttr(company)} project" loading="lazy">`
-      : "";
-    const website = (() => {
-      try {
-        const url = new URL(String(item.website || ""));
-        return ["http:", "https:"].includes(url.protocol)
-          ? `<a href="${escAttr(url.href)}" rel="noopener noreferrer">Visit client website</a>`
-          : "";
-      } catch {
-        return "";
-      }
-    })();
-    return `<article class="indica-managed-card">${image}<h3>${esc(String(item.title || company))}</h3><p class="indica-case-company">${esc(company)}</p>${item.profile ? `<p>${esc(String(item.profile))}</p>` : ""}${item.description ? `<p>${esc(String(item.description))}</p>` : ""}${item.services ? `<p>Services: ${esc(String(item.services))}</p>` : ""}${website}</article>`;
-  }).join("\n");
+  return items
+    .map((item) => {
+      const company = String(item.company || "Client");
+      const image = item.image
+        ? `<img class="indica-content-image" src="../../api/media.php?name=${encodeURIComponent(String(item.image))}" alt="${escAttr(company)} project" loading="lazy">`
+        : "";
+      const website = (() => {
+        try {
+          const url = new URL(String(item.website || ""));
+          return ["http:", "https:"].includes(url.protocol)
+            ? `<a href="${escAttr(url.href)}" rel="noopener noreferrer">Visit client website</a>`
+            : "";
+        } catch {
+          return "";
+        }
+      })();
+      return `<article class="indica-managed-card">${image}<h3>${esc(String(item.title || company))}</h3><p class="indica-case-company">${esc(company)}</p>${item.profile ? `<p>${esc(String(item.profile))}</p>` : ""}${item.description ? `<p>${esc(String(item.description))}</p>` : ""}${item.services ? `<p>Services: ${esc(String(item.services))}</p>` : ""}${website}</article>`;
+    })
+    .join("\n");
 }
 
 function reviewCards(items) {
-  return items.map((item) => {
-    const rating = Math.min(5, Math.max(1, Number(item.rating) || 0));
-    const stars = "★".repeat(Math.round(rating));
-    const attribution = [item.role, item.company].filter(Boolean).map(String).join(" · ");
-    return `<article class="indica-managed-card"><p class="indica-stars" aria-label="${rating.toFixed(1)} out of 5 stars">${stars}</p><p class="indica-rating">${rating.toFixed(1)} / 5.0</p><blockquote>“${esc(String(item.quote || ""))}”</blockquote><strong>${esc(String(item.client || "Client"))}</strong>${attribution ? `<p class="indica-case-company">${esc(attribution)}</p>` : ""}</article>`;
-  }).join("\n");
+  return items
+    .map((item) => {
+      const rating = Math.min(5, Math.max(1, Number(item.rating) || 0));
+      const stars = "★".repeat(Math.round(rating));
+      const attribution = [item.role, item.company]
+        .filter(Boolean)
+        .map(String)
+        .join(" · ");
+      return `<article class="indica-managed-card"><p class="indica-stars" aria-label="${rating.toFixed(1)} out of 5 stars">${stars}</p><p class="indica-rating">${rating.toFixed(1)} / 5.0</p><blockquote>“${esc(String(item.quote || ""))}”</blockquote><strong>${esc(String(item.client || "Client"))}</strong>${attribution ? `<p class="indica-case-company">${esc(attribution)}</p>` : ""}</article>`;
+    })
+    .join("\n");
 }
 
 const log = (msg) => console.log(msg);
@@ -529,7 +545,7 @@ function removeServicesGrid(html) {
 function addExploreServicesCTA(html) {
   const explore = HERO_BUTTON.replace(/href="[^"]*"/, 'href="services.html"')
     .replace(/Get\s+Started\s+Today/, "Explore Services")
-    .replace(/(<a\b[^>]*\bclass=")([^"]*)"/, "$1$2 explore-services-cta\"")
+    .replace(/(<a\b[^>]*\bclass=")([^"]*)"/, '$1$2 explore-services-cta"')
     .replace(/\s*data-pos="\d+"/g, "");
   const h1 = /<h1\b[^>]*>[\s\S]*?<\/h1\s*>/.exec(html);
   if (!h1) return html;
@@ -542,7 +558,9 @@ function addExploreServicesCTA(html) {
   const wrapStart = divAtBack(html, regionStart + target.index);
   const wrapEnd = wrapStart < 0 ? -1 : closeOf(html, wrapStart);
   if (wrapEnd < 0) return html;
-  return html.slice(0, wrapEnd) + `\n            ${explore}` + html.slice(wrapEnd);
+  return (
+    html.slice(0, wrapEnd) + `\n            ${explore}` + html.slice(wrapEnd)
+  );
 }
 
 /** Remove one matching button block from the Get Started hero. */
@@ -770,12 +788,17 @@ function insertContinue(html) {
 /** Replace the side-hustle payment CTA with a WhatsApp inquiry button. */
 function replaceContinueWithWhatsApp(html) {
   const cta = anchorsIn(html).find(
-    (anchor) => anchor.href === PAYMENT && /Continue\s+to\s+proceed/i.test(anchor.label),
+    (anchor) =>
+      anchor.href === PAYMENT && /Continue\s+to\s+proceed/i.test(anchor.label),
   );
-  if (!cta) throw new Error("Side Hustle WhatsApp CTA source button is missing");
+  if (!cta)
+    throw new Error("Side Hustle WhatsApp CTA source button is missing");
   let block = cta.raw
     .replace(/href="[^"]*"/, `href="${WHATSAPP_URL}"`)
-    .replace(/class="([^"]*)"/, (_, classes) => `class="${classes} whatsapp-cta-btn"`)
+    .replace(
+      /class="([^"]*)"/,
+      (_, classes) => `class="${classes} whatsapp-cta-btn"`,
+    )
     .replace(
       /(data-node-view-content-inner="button"[^>]*>)[\s\S]*?(<\/div>)/,
       "$1Chat on WhatsApp (+91 79750 44149)$2",
@@ -963,7 +986,9 @@ function updateFooterServices(html) {
   const footer = footerCard(html);
   if (!footer) return { html, changed: 0 };
   const footerHtml = html.slice(footer.start, footer.end);
-  const links = anchorsIn(footerHtml).filter((a) => /learnmore\.html$/i.test(a.href ?? ""));
+  const links = anchorsIn(footerHtml).filter((a) =>
+    /learnmore\.html$/i.test(a.href ?? ""),
+  );
   let changed = 0;
   const edits = [];
 
@@ -972,9 +997,16 @@ function updateFooterServices(html) {
     const svc = SERVICES[i];
     const raw = a.raw
       .replace(/href="[^"]*"/, `href="${svc.file}"`)
-      .replace(/(<a\b[^>]*>)[\s\S]*?(<\/a\s*>)/, (_, open, close) => `${open}<span>${esc(svc.name)}</span>${close}`);
+      .replace(
+        /(<a\b[^>]*>)[\s\S]*?(<\/a\s*>)/,
+        (_, open, close) => `${open}<span>${esc(svc.name)}</span>${close}`,
+      );
     if (raw !== a.raw) changed++;
-    edits.push({ start: footer.start + a.start, end: footer.start + a.end, text: raw });
+    edits.push({
+      start: footer.start + a.start,
+      end: footer.start + a.end,
+      text: raw,
+    });
   }
 
   // The extracted footer had only four service rows. Copy its final row to
@@ -986,16 +1018,25 @@ function updateFooterServices(html) {
     const pEnd = pClose < 0 ? -1 : footerHtml.indexOf(">", pClose) + 1;
     if (pStart >= 0 && pEnd > pClose) {
       const fifth = SERVICES[4];
-      const row = footerHtml.slice(pStart, pEnd)
+      const row = footerHtml
+        .slice(pStart, pEnd)
         .replace(/href="[^"]*"/, `href="${fifth.file}"`)
-        .replace(/(<a\b[^>]*>)[\s\S]*?(<\/a\s*>)/, (_, open, close) => `${open}<span>${esc(fifth.name)}</span>${close}`);
-      edits.push({ start: footer.start + pEnd, end: footer.start + pEnd, text: `\n${row}` });
+        .replace(
+          /(<a\b[^>]*>)[\s\S]*?(<\/a\s*>)/,
+          (_, open, close) => `${open}<span>${esc(fifth.name)}</span>${close}`,
+        );
+      edits.push({
+        start: footer.start + pEnd,
+        end: footer.start + pEnd,
+        text: `\n${row}`,
+      });
       changed++;
     } else warn("index.html: could not add the fifth footer service row");
   }
 
   edits.sort((a, b) => b.start - a.start);
-  for (const e of edits) html = html.slice(0, e.start) + e.text + html.slice(e.end);
+  for (const e of edits)
+    html = html.slice(0, e.start) + e.text + html.slice(e.end);
   return { html, changed };
 }
 
@@ -1015,7 +1056,8 @@ function updateFooterContactActions(html) {
         end > pos &&
         openEnd > start &&
         footer.slice(start, openEnd).includes(className)
-      ) return { start, end };
+      )
+        return { start, end };
       cursor = start - 1;
     }
     return null;
@@ -1024,9 +1066,10 @@ function updateFooterContactActions(html) {
   // Remove the dedicated Contact Us button from the footer. Keep the existing
   // contact details cleanup below so the contact column cannot return later.
   const contactButtons = anchorsIn(footer)
-    .filter((anchor) =>
-      anchor.href === "contactus.html" &&
-      /^Contact\s+Us$/i.test(anchor.label.replace(/\s+/g, " ").trim()),
+    .filter(
+      (anchor) =>
+        anchor.href === "contactus.html" &&
+        /^Contact\s+Us$/i.test(anchor.label.replace(/\s+/g, " ").trim()),
     )
     .map((anchor) => enclosing(anchor.start, "node-button node-button"))
     .filter(Boolean)
@@ -1035,16 +1078,23 @@ function updateFooterContactActions(html) {
     footer = footer.slice(0, button.start) + footer.slice(button.end);
   }
 
-  const contactInfo = /\+917975044149|contact@indicasoftware\.com|Share\s+on\s+WhatsApp/i;
-  const contactCells = [...footer.matchAll(/<div\b[^>]*class="[^"]*node-gridCell[^"]*"[^>]*>/g)]
+  const contactInfo =
+    /\+917975044149|contact@indicasoftware\.com|Share\s+on\s+WhatsApp/i;
+  const contactCells = [
+    ...footer.matchAll(/<div\b[^>]*class="[^"]*node-gridCell[^"]*"[^>]*>/g),
+  ]
     .map((match) => {
       const end = closeOf(footer, match.index);
       return end > 0 ? { start: match.index, end } : null;
     })
-    .filter((cell) => cell && contactInfo.test(footer.slice(cell.start, cell.end)))
+    .filter(
+      (cell) => cell && contactInfo.test(footer.slice(cell.start, cell.end)),
+    )
     .sort((a, b) => a.end - a.start - (b.end - b.start));
   if (contactCells[0]) {
-    footer = footer.slice(0, contactCells[0].start) + footer.slice(contactCells[0].end);
+    footer =
+      footer.slice(0, contactCells[0].start) +
+      footer.slice(contactCells[0].end);
   }
   return html.slice(0, card.start) + footer + html.slice(card.end);
 }
@@ -1084,7 +1134,11 @@ function buildComingSoon(contactHtml) {
     /(<title\b[^>]*>)[\s\S]*?(<\/title>)/,
     "$1Opening Soon! | Indica Software$2",
   );
-  h = setMeta(h, 'name="description"', "Opening Soon! — a new Indica Software feature is on the way.");
+  h = setMeta(
+    h,
+    'name="description"',
+    "Opening Soon! — a new Indica Software feature is on the way.",
+  );
   h = setMeta(h, 'property="og:title"', "Opening Soon! | Indica Software");
   h = setMeta(h, 'property="twitter:title"', "Opening Soon! | Indica Software");
 
@@ -1103,7 +1157,9 @@ function buildComingSoon(contactHtml) {
 
   // A way back, under the message (idempotent).
   if (!h.includes("indica-coming-cta")) {
-    const msg = /(<p\b[^>]*>)[^<]*This feature Coming Soon![^<]*(<\/p>)/.exec(h);
+    const msg = /(<p\b[^>]*>)[^<]*This feature Coming Soon![^<]*(<\/p>)/.exec(
+      h,
+    );
     if (msg) {
       const at = msg.index + msg[0].length;
       const block =
@@ -1145,9 +1201,10 @@ const CONTACT_DETAILS = `
 
 function insertContactDetails(html, file) {
   if (html.includes("data-indica-contact")) return html;
-  const intro = /<div\b[^>]*class="[^"]*\blast-block\b[^"]*"[^>]*>[\s\S]*?We are a trusted provider[\s\S]*?<\/div>/.exec(
-    html,
-  );
+  const intro =
+    /<div\b[^>]*class="[^"]*\blast-block\b[^"]*"[^>]*>[\s\S]*?We are a trusted provider[\s\S]*?<\/div>/.exec(
+      html,
+    );
   if (!intro) {
     warn(`${file}: contact intro block not found`);
     return html;
@@ -1218,7 +1275,9 @@ function insertBeforeFooter(html, marker, markup, file) {
   if (html.includes(marker)) return html;
   const footer = footerCard(html);
   if (!footer) {
-    warn(`${file}: footer container not found; managed section was not inserted`);
+    warn(
+      `${file}: footer container not found; managed section was not inserted`,
+    );
     return html;
   }
   return html.slice(0, footer.start) + markup + "\n" + html.slice(footer.start);
@@ -1227,8 +1286,14 @@ function insertBeforeFooter(html, marker, markup, file) {
 /** Place the managed case-study feed immediately after the Case Studies intro. */
 function placeCaseStudiesAfterIntro(html, markup, file) {
   html = html
-    .replace(/<section\b(?=[^>]*\bdata-indica-case-studies\b)[\s\S]*?<\/section>/i, "")
-    .replace(/<section\b(?=[^>]*\bdata-indica-testimonials\b)[\s\S]*?<\/section>/i, "");
+    .replace(
+      /<section\b(?=[^>]*\bdata-indica-case-studies\b)[\s\S]*?<\/section>/i,
+      "",
+    )
+    .replace(
+      /<section\b(?=[^>]*\bdata-indica-testimonials\b)[\s\S]*?<\/section>/i,
+      "",
+    );
   const heading = html.indexOf("CASE STUDIES");
   if (heading >= 0) {
     let cursor = heading;
@@ -1241,7 +1306,8 @@ function placeCaseStudiesAfterIntro(html, markup, file) {
         end > heading &&
         openEnd > start &&
         /\bnode-card\b/.test(html.slice(start, openEnd))
-      ) return `${html.slice(0, end)}\n${markup}\n${html.slice(end)}`;
+      )
+        return `${html.slice(0, end)}\n${markup}\n${html.slice(end)}`;
       cursor = start - 1;
     }
   }
@@ -1250,7 +1316,9 @@ function placeCaseStudiesAfterIntro(html, markup, file) {
 }
 
 function removeManagedDiv(html, marker) {
-  const match = new RegExp(`<div\\b(?=[^>]*\\b${marker}\\b)[^>]*>`, "i").exec(html);
+  const match = new RegExp(`<div\\b(?=[^>]*\\b${marker}\\b)[^>]*>`, "i").exec(
+    html,
+  );
   if (!match) return html;
   const end = closeOf(html, match.index);
   return end < 0 ? html : html.slice(0, match.index) + html.slice(end);
@@ -1261,15 +1329,23 @@ function placeHomeCaseStudies(html) {
   html = html
     .replace(/<section\b[^>]*data-indica-case-studies[\s\S]*?<\/section>/i, "")
     .replace(/<section\b[^>]*data-indica-testimonials[\s\S]*?<\/section>/i, "");
-  html = removeManagedDiv(removeManagedDiv(html, "data-indica-case-studies"), "data-indica-testimonials");
+  html = removeManagedDiv(
+    removeManagedDiv(html, "data-indica-case-studies"),
+    "data-indica-testimonials",
+  );
 
   const caseHeading = html.indexOf("CASE STUDIES");
-  const caseParagraph = caseHeading < 0 ? -1 : html.indexOf("gml-paragraph", caseHeading);
+  const caseParagraph =
+    caseHeading < 0 ? -1 : html.indexOf("gml-paragraph", caseHeading);
   if (caseParagraph >= 0) {
     const open = html.lastIndexOf("<div", caseParagraph);
     const end = closeOf(html, open);
-    if (open >= 0 && end >= 0) html = `${html.slice(0, end)}\n${HOME_CASES_LIST}\n${html.slice(end)}`;
-    else warn("index.html: could not attach managed case studies to the existing section");
+    if (open >= 0 && end >= 0)
+      html = `${html.slice(0, end)}\n${HOME_CASES_LIST}\n${html.slice(end)}`;
+    else
+      warn(
+        "index.html: could not attach managed case studies to the existing section",
+      );
   } else {
     warn("index.html: existing Case Studies section was not found");
   }
@@ -1277,9 +1353,11 @@ function placeHomeCaseStudies(html) {
   const say = html.indexOf("Say?");
   const h1 = say < 0 ? -1 : html.lastIndexOf("<h1", say);
   const headingClass = h1 < 0 ? -1 : html.lastIndexOf("gml-heading", h1);
-  const headingOpen = headingClass < 0 ? -1 : html.lastIndexOf("<div", headingClass);
+  const headingOpen =
+    headingClass < 0 ? -1 : html.lastIndexOf("<div", headingClass);
   const headingEnd = headingOpen < 0 ? -1 : closeOf(html, headingOpen);
-  if (headingEnd >= 0) html = `${html.slice(0, headingEnd)}\n${HOME_TESTIMONIALS_LIST}\n${html.slice(headingEnd)}`;
+  if (headingEnd >= 0)
+    html = `${html.slice(0, headingEnd)}\n${HOME_TESTIMONIALS_LIST}\n${html.slice(headingEnd)}`;
   else warn("index.html: existing What Clients Say section was not found");
   return html;
 }
@@ -1287,10 +1365,7 @@ function placeHomeCaseStudies(html) {
 /** FAQ accordions on services.html: open them and keep them clickable. */
 function fixFaq(html) {
   // element attributes only — the CSS rule [data-open="false"] stays intact
-  return html.replace(
-    /(<div\b[^>]*\bdata-open=")false(")/g,
-    "$1true$2",
-  );
+  return html.replace(/(<div\b[^>]*\bdata-open=")false(")/g, "$1true$2");
 }
 
 /** Services CTA: keep only the "I am Interested" payment action. */
@@ -1331,7 +1406,9 @@ function replaceServiceCta(html) {
 function removeServiceButton(html, labelRe) {
   let button;
   while (
-    (button = anchorsIn(html).find((a) => labelRe.test(a.label.replace(/\s+/g, " ").trim())))
+    (button = anchorsIn(html).find((a) =>
+      labelRe.test(a.label.replace(/\s+/g, " ").trim()),
+    ))
   ) {
     const block = climbToBlock(html, button.start, labelRe);
     if (block.end <= block.start) break;
@@ -1354,7 +1431,8 @@ function tagLearnMore(html) {
     });
   }
   edits.sort((x, y) => y.start - x.start);
-  for (const e of edits) html = html.slice(0, e.start) + e.text + html.slice(e.end);
+  for (const e of edits)
+    html = html.slice(0, e.start) + e.text + html.slice(e.end);
   return html;
 }
 
@@ -1386,7 +1464,8 @@ function careerLinks(html) {
       edits.push(setHref(a, COMINGSOON));
   }
   edits.sort((x, y) => y.start - x.start);
-  for (const e of edits) html = html.slice(0, e.start) + e.text + html.slice(e.end);
+  for (const e of edits)
+    html = html.slice(0, e.start) + e.text + html.slice(e.end);
   return html;
 }
 
@@ -1547,12 +1626,21 @@ let canonicalFooter;
 
   const casePath = path.join(HOME, "casestudies.html");
   let caseHtml = read(casePath);
-  caseHtml = placeCaseStudiesAfterIntro(caseHtml, CASE_STUDIES_SECTIONS, "casestudies.html");
+  caseHtml = placeCaseStudiesAfterIntro(
+    caseHtml,
+    CASE_STUDIES_SECTIONS,
+    "casestudies.html",
+  );
   write(casePath, caseHtml);
 
   const techPath = path.join(HOME, "technologies.html");
   let techHtml = read(techPath);
-  techHtml = insertBeforeFooter(techHtml, "data-indica-technology", TECHNOLOGY_SECTION, "technologies.html");
+  techHtml = insertBeforeFooter(
+    techHtml,
+    "data-indica-technology",
+    TECHNOLOGY_SECTION,
+    "technologies.html",
+  );
   write(techPath, techHtml);
 }
 
@@ -1569,7 +1657,12 @@ log("\n9. contactus.html — contact details section");
   const p = path.join(HOME, "contactus.html");
   const h = read(p);
   let next = insertContactDetails(h, "contactus.html");
-  next = insertBeforeFooter(next, "data-indica-inquiry", INQUIRY_FORM, "contactus.html");
+  next = insertBeforeFooter(
+    next,
+    "data-indica-inquiry",
+    INQUIRY_FORM,
+    "contactus.html",
+  );
   if (next !== h) log("  contact details inserted");
   write(p, next);
 }
@@ -1699,8 +1792,7 @@ for (const [dir, f] of allPages) {
       issues.push("Not Interested button should be absent");
     if (anchors.some((a) => a.label === "Start Your Project"))
       issues.push("Start Your Project still present");
-    const faqOpen = (html.match(/<div\b[^>]*\bdata-open="true"/g) ?? [])
-      .length;
+    const faqOpen = (html.match(/<div\b[^>]*\bdata-open="true"/g) ?? []).length;
     const faqShut = (html.match(/<div\b[^>]*\bdata-open="false"/g) ?? [])
       .length;
     if (faqOpen < 6) issues.push(`${faqOpen} FAQ item(s) open (want >= 6)`);
@@ -1735,9 +1827,9 @@ for (const [dir, f] of allPages) {
     const head = /Our\s+Services/.exec(html);
     if (!head) issues.push("footer Our Services column missing");
     else {
-      const foot = anchorsIn(
-        html.slice(head.index, head.index + 40000),
-      ).filter((a) => a.href && a.href.endsWith("-learnmore.html"));
+      const foot = anchorsIn(html.slice(head.index, head.index + 40000)).filter(
+        (a) => a.href && a.href.endsWith("-learnmore.html"),
+      );
       if (foot.length < 5) issues.push(`footer services: ${foot.length} links`);
       else {
         const dec = (s) => s.replace(/&amp;/g, "&");
@@ -1773,7 +1865,10 @@ for (const [dir, f] of allPages) {
   // the strategic heading pair is clickable
   for (const m of html.matchAll(/<h3\b[^>]*>[\s\S]*?<\/h3\s*>/g)) {
     const label = txt(m[0]).replace(/\s+/g, " ").trim();
-    if ((label === "Career Development" || label === "Coaching") && !m[0].includes("career-link"))
+    if (
+      (label === "Career Development" || label === "Coaching") &&
+      !m[0].includes("career-link")
+    )
       issues.push(`heading "${label}" not linked to ${COMINGSOON}`);
   }
 

@@ -44,8 +44,7 @@ const OVERRIDE_CSS = readFileSync(
   join(PROJECT_ROOT, "static-fix.css"),
   "utf8",
 ).trim();
-const INDENTED_OVERRIDE_CSS = OVERRIDE_CSS
-  .split(/\r?\n/)
+const INDENTED_OVERRIDE_CSS = OVERRIDE_CSS.split(/\r?\n/)
   .map((line) => (line ? `      ${line}` : ""))
   .join("\n");
 
@@ -159,9 +158,7 @@ function stripScripts(html) {
     }
     if (end === -1) {
       // No closing tag: drop through the opening tag only.
-      out.push(
-        html.slice(cursor, selfCloseOf(lower, start, openEnd)),
-      );
+      out.push(html.slice(cursor, selfCloseOf(lower, start, openEnd)));
       cursor = selfCloseOf(lower, start, openEnd);
       continue;
     }
@@ -177,7 +174,11 @@ function selfCloseOf(lower, start, openEnd) {
 
 /** Remove card wrappers that contain no visible text or media at all. */
 function removeEmptyCards(html) {
-  const cards = [...html.matchAll(/<div\b(?=[^>]*\bclass="[^"]*\bnode-card\b[^"]*\bblock-card\b)[^>]*>/gi)];
+  const cards = [
+    ...html.matchAll(
+      /<div\b(?=[^>]*\bclass="[^"]*\bnode-card\b[^"]*\bblock-card\b)[^>]*>/gi,
+    ),
+  ];
   const removals = [];
   for (const card of cards) {
     const start = card.index;
@@ -185,7 +186,7 @@ function removeEmptyCards(html) {
     divTags.lastIndex = start;
     let depth = 0;
     let end = -1;
-    for (let token; (token = divTags.exec(html)); ) {
+    for (let token; (token = divTags.exec(html));) {
       if (token[0].startsWith("</")) depth--;
       else if (!token[0].endsWith("/>")) depth++;
       if (depth === 0) {
@@ -202,7 +203,10 @@ function removeEmptyCards(html) {
       .replace(/<[^>]+>/g, "")
       .replace(/&(?:nbsp|#0*160|#x0*a0);/gi, " ")
       .replace(/[\s\u200b\ufeff]/g, "");
-    const containsVisual = /<(?:img|svg|video|canvas|iframe|object|embed|audio|input|button|table|hr|progress|meter)\b/i.test(body) ||
+    const containsVisual =
+      /<(?:img|svg|video|canvas|iframe|object|embed|audio|input|button|table|hr|progress|meter)\b/i.test(
+        body,
+      ) ||
       /<a\b[^>]*\bhref\s*=/i.test(body) ||
       /\baria-label\s*=/.test(card[0]);
     if (!visibleText && !containsVisual) removals.push({ start, end });
@@ -217,7 +221,13 @@ function removeEmptyCards(html) {
 function removeEmptyCaseStudyImageCards(html) {
   const heading = html.indexOf("CASE STUDIES");
   if (heading < 0) return { html, removed: 0 };
-  const cardMatches = [...html.slice(0, heading).matchAll(/<div\b(?=[^>]*\bclass="[^"]*\bnode-card\b[^"]*\bblock-card\b)[^>]*>/gi)];
+  const cardMatches = [
+    ...html
+      .slice(0, heading)
+      .matchAll(
+        /<div\b(?=[^>]*\bclass="[^"]*\bnode-card\b[^"]*\bblock-card\b)[^>]*>/gi,
+      ),
+  ];
   const caseCard = cardMatches.at(-1);
   if (!caseCard) return { html, removed: 0 };
 
@@ -225,7 +235,7 @@ function removeEmptyCaseStudyImageCards(html) {
     const tags = /<\/?div\b[^>]*>/gi;
     tags.lastIndex = start;
     let depth = 0;
-    for (let token; (token = tags.exec(source)); ) {
+    for (let token; (token = tags.exec(source));) {
       if (token[0].startsWith("</")) depth--;
       else if (!token[0].endsWith("/>")) depth++;
       if (depth === 0) return tags.lastIndex;
@@ -236,7 +246,11 @@ function removeEmptyCaseStudyImageCards(html) {
   const cardEnd = matchingDivEnd(html, caseCard.index);
   if (cardEnd < 0) return { html, removed: 0 };
   const cardBody = html.slice(caseCard.index, cardEnd);
-  const grids = [...cardBody.matchAll(/<div\b(?=[^>]*\bclass="[^"]*\bnode-gridLayout\b[^"]*\bblock-gridLayout\b)[^>]*>/gi)];
+  const grids = [
+    ...cardBody.matchAll(
+      /<div\b(?=[^>]*\bclass="[^"]*\bnode-gridLayout\b[^"]*\bblock-gridLayout\b)[^>]*>/gi,
+    ),
+  ];
   const removals = [];
   for (const grid of grids) {
     const start = caseCard.index + grid.index;
@@ -249,7 +263,8 @@ function removeEmptyCaseStudyImageCards(html) {
       .replace(/<[^>]+>/g, "")
       .replace(/&(?:nbsp|#0*160|#x0*a0);/gi, " ")
       .replace(/[\s\u200b\ufeff]/g, "");
-    const hasEmptyPlaceholders = /node-mediaPlaceholder/.test(body) &&
+    const hasEmptyPlaceholders =
+      /node-mediaPlaceholder/.test(body) &&
       /data-testid="media-placeholder"/.test(body) &&
       !/<img\b[^>]*\bsrc\s*=\s*['"][^'"]+['"]/i.test(body);
     if (hasEmptyPlaceholders && !visibleText) removals.push({ start, end });
@@ -338,15 +353,10 @@ function demoteExtraHeadings(html) {
 /** Give the exported navigation bar a real navigation landmark. The export
  *  uses a plain <div>, so assistive tech sees no landmark at all. */
 function addNavLandmark(html) {
-  return html.replace(
-    /<div\b[^>]*\bdata-navbar-editor="true"[^>]*>/i,
-    (tag) =>
-      /\brole=/.test(tag)
-        ? tag
-        : tag.replace(
-            /^<div\b/i,
-            '<div role="navigation" aria-label="Main"',
-          ),
+  return html.replace(/<div\b[^>]*\bdata-navbar-editor="true"[^>]*>/i, (tag) =>
+    /\brole=/.test(tag)
+      ? tag
+      : tag.replace(/^<div\b/i, '<div role="navigation" aria-label="Main"'),
   );
 }
 
@@ -362,9 +372,8 @@ function fix(html, file) {
   html = emptyCaseStudyImages.html;
 
   // 1b. Stale placeholder media (no PHP endpoint on a static host → 404).
-  const staleMediaRemoved = (
-    html.match(/<img\b[^>]*\bapi\/media\.php/gi) ?? []
-  ).length;
+  const staleMediaRemoved = (html.match(/<img\b[^>]*\bapi\/media\.php/gi) ?? [])
+    .length;
   html = stripStaticMediaImages(html);
 
   // 1c. Correct the document outline: exactly one <h1> per page.
@@ -575,15 +584,15 @@ function fix(html, file) {
     emptyCaseStudyImageCardsRemoved: emptyCaseStudyImages.removed,
     staleMediaRemoved,
     demotedH1,
-    navLandmark: /<div\b[^>]*\brole="navigation"[^>]*\bdata-navbar-editor="true"/i.test(
-      html,
-    )
-      ? 1
-      : 0,
+    navLandmark:
+      /<div\b[^>]*\brole="navigation"[^>]*\bdata-navbar-editor="true"/i.test(
+        html,
+      )
+        ? 1
+        : 0,
     // our own allowlisted script does not count as a leftover
-    scripts: (
-      html.match(/<script\b(?![^>]*\bdata-static-fix\b)/gi) ?? []
-    ).length,
+    scripts: (html.match(/<script\b(?![^>]*\bdata-static-fix\b)/gi) ?? [])
+      .length,
   };
 
   writeFileSync(file, html.replace(/\r?\n/g, lineEnding));
@@ -601,9 +610,8 @@ const leftovers = pages
       googleapis: (html.match(/fonts\.googleapis\.com/g) ?? []).length,
       gammahosted: (html.match(/assets\.gammahosted\.com/g) ?? []).length,
       ifcdn: (html.match(/if-cdn\.com/g) ?? []).length,
-      scripts: (
-        html.match(/<script\b(?![^>]*\bdata-static-fix\b)/gi) ?? []
-      ).length,
+      scripts: (html.match(/<script\b(?![^>]*\bdata-static-fix\b)/gi) ?? [])
+        .length,
       branding: (html.match(/made with gamma|report this page/gi) ?? []).length,
       gammaSite: (html.match(/gamma\.site/g) ?? []).length,
       gammaWrap: (html.match(/gamma\.app\/external-link/g) ?? []).length,
