@@ -116,9 +116,18 @@ function CloseIcon() {
 export default function SocialBubble() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
+  const toggleRef = useRef(null);
   const firstLinkRef = useRef(null);
 
-  const close = useCallback(() => setOpen(false), []);
+  // Move focus back to the toggle before hiding the list. Hiding a list with
+  // `aria-hidden` while one of its links still has focus makes Chrome log an
+  // accessibility warning and loses the keyboard position.
+  const close = useCallback(() => {
+    if (rootRef.current?.contains(document.activeElement)) {
+      toggleRef.current?.focus();
+    }
+    setOpen(false);
+  }, []);
 
   // Escape closes the bubble; a click anywhere outside it does the same.
   useEffect(() => {
@@ -151,6 +160,7 @@ export default function SocialBubble() {
         id="social-bubble-menu"
         className="social-bubble__list"
         aria-hidden={!open}
+        inert={!open}
       >
         {SOCIAL_LINKS.map((link, index) => (
           <li key={link.id} className="social-bubble__item">
@@ -173,6 +183,7 @@ export default function SocialBubble() {
       </ul>
 
       <button
+        ref={toggleRef}
         type="button"
         className="social-bubble__toggle"
         aria-expanded={open}

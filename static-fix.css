@@ -204,6 +204,14 @@ html body .gml-card .gml-card__canvas h2.heading.indica-h1-size {
 }
 .node-card.last-block .node-gridLayout.last-block .grid-col-controls {
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: clamp(0.75rem, 2vw, 1.5rem) !important;
+  row-gap: clamp(1rem, 2vw, 1.5rem) !important;
+  align-items: start !important;
+}
+/* Gamma centers each footer cell vertically, which made the three columns
+   start at different heights. Top-align them so the headings line up. */
+.node-card.last-block .grid-cell {
+  justify-content: flex-start !important;
 }
 .node-card.last-block .node-buttonGroup {
   flex-direction: column !important;
@@ -717,7 +725,7 @@ svg {
   /* `html body` outranks the exported `body` declaration later in the document,
      so the page content still starts below the now-taller fixed bar. */
   html body {
-    --doc-padding-top: 138px;
+    --doc-padding-top: 142px;
   }
   [data-navbar-editor="true"] {
     padding-inline: 0.55rem !important;
@@ -727,7 +735,7 @@ svg {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0.2rem !important;
+    gap: 0.45rem !important;
     width: 100% !important;
   }
   .navbar-view-content > a.chakra-link {
@@ -742,13 +750,26 @@ svg {
     flex-wrap: wrap !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0.15rem 0.35rem !important;
+    gap: 0.2rem 0.45rem !important;
     width: 100% !important;
   }
   .node-navbarLinks {
     flex: 0 1 auto !important;
     width: auto !important;
     min-width: 0;
+  }
+  /* The exported link row is a no-wrap flexbox. On a phone the five labels
+     have to share the bar width, so each one shrinks and the one-line clamp
+     turns them into "Ho…", "Servi…". Let the row wrap and size every link to
+     its own text instead. */
+  .node-navbarLinks [data-selection-ring] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.1rem 0.25rem !important;
+    width: 100% !important;
+    padding-left: 0 !important;
   }
   .node-navbarLinks > [data-node-view-wrapper] {
     display: flex !important;
@@ -760,15 +781,26 @@ svg {
   }
   .node-navbarLinks .node-button,
   .node-navbarButtons .node-button {
+    flex: 0 0 auto !important;
     width: auto !important;
     min-width: 0 !important;
   }
   .node-navbarLinks .node-button .button,
   .node-navbarButtons .node-button .button {
-    min-height: 36px;
-    padding-inline: 0.5rem !important;
-    font-size: clamp(0.72rem, 3vw, 0.9rem) !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 34px;
+    padding-inline: 0.35rem !important;
+    font-size: clamp(0.64rem, 2.7vw, 0.82rem) !important;
     white-space: nowrap !important;
+  }
+  .node-navbarLinks .node-button .chakra-text,
+  .node-navbarButtons .node-button .chakra-text {
+    display: block !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    -webkit-line-clamp: unset !important;
+    word-break: normal !important;
   }
   .node-navbarButtons {
     flex: 0 0 auto !important;
@@ -809,5 +841,18 @@ svg {
     display: block;
     max-width: 100%;
     overflow-x: auto;
+  }
+}
+
+/* Very narrow phones (320px): shave the label padding so the five links still
+   fit on one row instead of adding a third bar row over the page content. */
+@media (max-width: 21rem) {
+  .node-navbarLinks .node-button .button,
+  .node-navbarButtons .node-button .button {
+    padding-inline: 0.2rem !important;
+    font-size: 0.6rem !important;
+  }
+  .node-navbarLinks [data-selection-ring] {
+    gap: 0.05rem 0.1rem !important;
   }
 }

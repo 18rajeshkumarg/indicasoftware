@@ -305,6 +305,29 @@ function stripStaticMediaImages(html) {
   return html.replace(/<img\b[^>]*\bapi\/media\.php[^>]*>\s*/gi, "");
 }
 
+/** Remove the exported image preload hints. Several of them point at images
+ *  the page never uses (for example the LinkedIn icon), so Chrome logs a
+ *  "preloaded using link preload but not used" warning in the console. The
+ *  images that are actually rendered still load normally from their own tags. */
+function stripImagePreloads(html) {
+  return html.replace(/<link\b[^>]*>/gi, (tag) =>
+    /\brel=["']preload["']/i.test(tag) && /\bas=["']image["']/i.test(tag)
+      ? ""
+      : tag,
+  );
+}
+
+/** Older page exports carried a one-off footer override block that duplicated
+ *  the maintained rules in `static-fix.css`. Keeping both makes the cascade
+ *  impossible to reason about, so drop the stale copy and let the stylesheet
+ *  own the footer and navbar layout. */
+function stripLegacyFooterOverride(html) {
+  return html.replace(
+    /\s*<style\b[^>]*\bdata-footer-contact-adjustment\b[^>]*>[\s\S]*?<\/style>/gi,
+    "",
+  );
+}
+
 /** Mark a Gamma heading so static-fix.css can pin its original size. */
 function demoteHeadingTag(tag) {
   let out = tag.replace(/^<h1\b/i, "<h2");
@@ -376,11 +399,21 @@ function fix(html, file) {
     .length;
   html = stripStaticMediaImages(html);
 
-  // 1c. Correct the document outline: exactly one <h1> per page.
+  // 1c. Unused image preload hints (Chrome logs a warning for each one) and
+  //     the old one-off footer override block.
+  const imagePreloadsRemoved = (
+    html.match(
+      /<link\b[^>]*\brel=["']preload["'][^>]*\bas=["']image["'][^>]*>/gi,
+    ) ?? []
+  ).length;
+  html = stripImagePreloads(html);
+  html = stripLegacyFooterOverride(html);
+
+  // 1d. Correct the document outline: exactly one <h1> per page.
   const demotedH1 = Math.max(0, (html.match(/<h1\b/gi) ?? []).length - 1);
   html = demoteExtraHeadings(html);
 
-  // 1d. A real navigation landmark for assistive tech.
+  // 1e. A real navigation landmark for assistive tech.
   html = addNavLandmark(html);
 
   // 2. Shared Gamma stylesheets -> local vendor copy.
@@ -583,6 +616,7 @@ function fix(html, file) {
     emptyCardsRemoved: emptyCards.removed,
     emptyCaseStudyImageCardsRemoved: emptyCaseStudyImages.removed,
     staleMediaRemoved,
+    imagePreloadsRemoved,
     demotedH1,
     navLandmark:
       /<div\b[^>]*\brole="navigation"[^>]*\bdata-navbar-editor="true"/i.test(

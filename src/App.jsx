@@ -67,8 +67,14 @@ function resolveRoute(pathname) {
 }
 
 function normaliseRoute(hash) {
-  const route = decodeURIComponent(hash.replace(/^#/, "")).trim();
+  let route = hash.replace(/^#/, "").trim();
   if (!route) return DEFAULT_ROUTE;
+  try {
+    route = decodeURIComponent(route);
+  } catch {
+    // A malformed escape (for example "#/%") must not crash the app or log an
+    // uncaught URIError. Resolve the raw text instead.
+  }
   return resolveRoute(route.startsWith("/") ? route : `/${route}`);
 }
 
@@ -122,6 +128,12 @@ function apiUrl(path) {
   const apiBase = import.meta.env.VITE_API_BASE_URL?.trim();
   if (apiBase) {
     return new URL(path.replace(/^\//, ""), `${apiBase.replace(/\/+$/, "")}/`);
+  }
+  // In development the pages live under Vite's base path, but the PHP API is
+  // proxied from the site root (`/api`). Resolve against the origin so the
+  // `api/...` path is not prefixed with Vite's base (or with `/api` again).
+  if (import.meta.env.DEV) {
+    return new URL(path.replace(/^\//, ""), `${window.location.origin}/`);
   }
   const base = import.meta.env.BASE_URL || "/";
   return new URL(`${base}${path.replace(/^\//, "")}`, window.location.href);
@@ -285,9 +297,11 @@ async function loadManagedContent(doc, route) {
           query: fields.get("query"),
           website: fields.get("website"),
         };
-        submit.disabled = true;
-        status.textContent = "Sending your query…";
-        status.dataset.state = "";
+        if (submit) submit.disabled = true;
+        if (status) {
+          status.textContent = "Sending your query…";
+          status.dataset.state = "";
+        }
         try {
           const response = await fetch(apiUrl("api/inquiry.php"), {
             method: "POST",
@@ -297,16 +311,20 @@ async function loadManagedContent(doc, route) {
           const result = await response.json();
           if (!response.ok)
             throw new Error(result.error || "Unable to send your query.");
-          status.textContent =
-            result.message || "Your query has been received.";
-          status.dataset.state = "success";
+          if (status) {
+            status.textContent =
+              result.message || "Your query has been received.";
+            status.dataset.state = "success";
+          }
           form.reset();
         } catch (error) {
-          status.textContent =
-            error.message || "Unable to send your query. Please try again.";
-          status.dataset.state = "error";
+          if (status) {
+            status.textContent =
+              error.message || "Unable to send your query. Please try again.";
+            status.dataset.state = "error";
+          }
         } finally {
-          submit.disabled = false;
+          if (submit) submit.disabled = false;
         }
       });
     }
@@ -535,14 +553,10 @@ export default function App() {
     if (title) document.title = title;
   }, [painted, titles]);
 
-  // Refresh server-managed content whenever its route becomes visible again.
-  useEffect(() => {
-    if (!ready.has(route)) return;
-    const doc = frames.current.get(route)?.contentDocument;
-    if (doc) loadManagedContent(doc, route);
-  }, [route, ready]);
-
   // Keep the active route in sync when an admin saves or publishes an entry.
+  // Polling is deliberately slow: the previous 2-second interval made two
+  // requests every two seconds for as long as a managed page stayed open and
+  // could fill the console with network errors whenever the API was offline.
   useEffect(() => {
     if (!ready.has(route)) return;
     const doc = frames.current.get(route)?.contentDocument;
@@ -552,17 +566,24 @@ export default function App() {
       )
     )
       return;
+    let lastRefresh = 0;
     const refresh = () => {
       if (document.visibilityState === "hidden") return;
+      const now = Date.now();
+      if (now - lastRefresh < 15000) return;
+      lastRefresh = now;
       const activeDoc = frames.current.get(route)?.contentDocument;
       if (activeDoc) loadManagedContent(activeDoc, route);
     };
-    // Admin saves are reflected on whichever managed-content page is open.
-    const interval = window.setInterval(refresh, 2000);
+    // Admin saves are reflected within a minute, or immediately when the
+    // visitor returns to the tab.
+    const interval = window.setInterval(refresh, 60000);
     window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
     return () => {
       window.clearInterval(interval);
       window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
     };
   }, [route, ready]);
 
