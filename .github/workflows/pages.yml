@@ -34,6 +34,14 @@ jobs:
         env:
           VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://indicasoftware-content-api-production.up.railway.app' }}
         run: npm run build
+      - name: Verify production build
+        run: |
+          test -f dist/index.html
+          grep -q '/indicasoftware/assets/' dist/index.html
+          if grep -q '/src/main.jsx' dist/index.html; then
+            echo "dist/index.html still references the Vite source entry; refusing to deploy unbuilt source." >&2
+            exit 1
+          fi
       - name: Exclude PHP files from the static Pages artifact
         run: rm -rf dist/api dist/admin && rm -f dist/bootstrap.php dist/.htaccess
       - name: Configure Pages

@@ -18,8 +18,8 @@ npm install
 npm run dev
 ```
 
-Open the address printed in the terminal, usually <http://localhost:5173/>.
-Press `Ctrl+C` to stop the server.
+Open the address printed in the terminal, usually
+<http://localhost:5173/indicasoftware/>. Press `Ctrl+C` to stop the server.
 
 Vite starts in well under a second and serves the shell immediately; the home
 page appears as soon as its document is parsed (typically 300–600 ms on a cold
@@ -33,9 +33,10 @@ npm run preview    # serves dist/ locally to check it
 ```
 
 Deploy the `dist` folder to any static host (GitHub Pages, Netlify, Vercel,
-an S3 bucket, …). The build uses relative asset paths, so it works from a
-sub-folder as well as from a domain root. Deep links such as `/services` are
-resolved on load when the host falls back to `index.html`.
+an S3 bucket, …). The build uses the GitHub Pages base path
+`/indicasoftware/`, so the generated HTML loads its hashed assets from
+<https://18rajeshkumarg.github.io/indicasoftware/>. Deep links such as
+`/services` are resolved on load when the host falls back to `index.html`.
 
 ## PHP content admin and contact inquiries
 
@@ -72,7 +73,7 @@ serve the frontend but cannot run the admin or accept inquiry submissions.
 
 ```
 index.html                Vite entry document
-vite.config.js            React plugin + relative base path
+vite.config.js            React plugin + GitHub Pages base path
 src/
   main.jsx                React bootstrap, imports app.css
   App.jsx                 hash router, page frames, link interception, preloader
@@ -270,6 +271,13 @@ scroll restoration, the not-found panel and cold-start timing.
 ## GitHub Pages deployment
 
 The GitHub Actions workflow in `.github/workflows/pages.yml` builds and deploys the static website whenever `main` is updated. GitHub Pages cannot execute PHP, so that deployment omits the PHP endpoints. The admin panel, live content updates, and inquiry submissions need a separate PHP-capable host, configured as described above.
+
+In the repository, **Settings → Pages → Build and deployment → Source** must
+be **GitHub Actions**. If it is set to **Deploy from a branch** (`main` / root),
+GitHub publishes the raw repository instead of `dist/`: the live page then
+contains `<script type="module" src="/src/main.jsx">` and the browser cannot
+execute the JSX source. The workflow's verification step rejects a build that
+still references `/src/main.jsx`, so an unbuilt source tree cannot be deployed.
 
 ## Deploying the PHP admin and inquiry API on Render
 

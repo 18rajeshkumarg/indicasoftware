@@ -21,7 +21,12 @@
           margin: 0;
           background: #0d0a2c;
           color: #f5f3ff;
-          font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+          font-family:
+            system-ui,
+            -apple-system,
+            "Segoe UI",
+            Arial,
+            sans-serif;
         }
         .noscript-fallback {
           max-width: 40rem;
@@ -62,6 +67,9 @@
         </ul>
       </div>
     </noscript>
+    <!-- Vite source entry. `vite build` rewrites this to the hashed production
+         bundle in dist/index.html. Never rewrite it to include the GitHub Pages
+         base path: browsers cannot execute JSX source directly. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

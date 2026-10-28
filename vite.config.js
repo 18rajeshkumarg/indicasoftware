@@ -24,7 +24,9 @@ export default defineConfig({
       modernPolyfills: true,
     }),
   ],
-  base: "./",
+  // GitHub Pages project site:
+  // https://18rajeshkumarg.github.io/indicasoftware/
+  base: "/indicasoftware/",
   server: {
     proxy: {
       "/api": {
