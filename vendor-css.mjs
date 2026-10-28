@@ -3,9 +3,10 @@
  * renders instantly and works with no external network round-trips:
  *
  *   1. the 4 shared Gamma stylesheets            -> public/vendor/gamma/*.css
- *   2. the 3 Google Fonts stylesheets + woff2    -> public/vendor/fonts/*
- *   3. the 3 Gamma layout mask SVGs              -> public/vendor/gamma/*.svg
- *   4. the favicon/logo PNG                      -> public/*
+ *   2. the media files those stylesheets use     -> public/vendor/media/*
+ *   3. the 3 Google Fonts stylesheets + woff2    -> public/vendor/fonts/*
+ *   4. the 3 Gamma layout mask SVGs              -> public/vendor/gamma/*.svg
+ *   5. the favicon/logo PNG                      -> public/*
  *
  * Run with `npm run pages:vendor`.
  */
@@ -16,12 +17,14 @@ import {
   readdirSync,
   statSync,
 } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = "C:/Users/asha g/Documents/Indica Software";
+const ROOT = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(ROOT, "public");
 const PAGES = join(PUBLIC, "pages");
 const gammaDir = join(PUBLIC, "vendor", "gamma");
+const mediaDir = join(PUBLIC, "vendor", "media");
 const fontDir = join(PUBLIC, "vendor", "fonts");
 
 mkdirSync(gammaDir, { recursive: true });
@@ -62,6 +65,28 @@ for (const url of gammaCss) {
     record(`css ${name}`);
   } catch (err) {
     record(`css ${name}`, err);
+  }
+}
+
+/* 1b. Media (KaTeX fonts) referenced by the vendored Gamma stylesheets ----- */
+const mediaHost =
+  "https://assets.gammahosted.com/eswob8bki/_next/static/media/";
+const mediaNames = new Set();
+for (const name of readdirSync(gammaDir).filter((f) => f.endsWith(".css"))) {
+  const css = readFileSync(join(gammaDir, name), "utf8");
+  for (const m of css.matchAll(/url\(\.\.\/media\/([^)'"]+)\)/g)) {
+    mediaNames.add(m[1].trim());
+  }
+}
+if (mediaNames.size) {
+  mkdirSync(mediaDir, { recursive: true });
+  for (const name of mediaNames) {
+    try {
+      writeFileSync(join(mediaDir, name), await fetchBytes(mediaHost + name));
+      record(`media ${name}`);
+    } catch (err) {
+      record(`media ${name}`, err);
+    }
   }
 }
 

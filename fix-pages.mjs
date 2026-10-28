@@ -66,6 +66,22 @@ const fontFiles = new Set(
   readdirSync(FONT_DIR).filter((f) => f.endsWith(".css")),
 );
 
+// Every saved page lives in one of two sibling folders. Links exported by the
+// Gamma clone assume a flat folder, so a home page's `services.html` happens to
+// work while its `fullstack-web-ai-learnmore.html` link does not (and vice
+// versa). Keep the real file names here so the rewrite below always points at
+// an existing page.
+const PAGE_SETS = new Map(
+  ["home", "learn-more"].map((folder) => [
+    folder,
+    new Set(
+      readdirSync(join(ROOT, "pages", folder)).filter((f) =>
+        f.endsWith(".html"),
+      ),
+    ),
+  ]),
+);
+
 /** Local path for a Google Fonts stylesheet, keyed on the family name. */
 function fontTarget(url) {
   const family = /family=([^:&]+)/.exec(url)?.[1];
@@ -172,6 +188,19 @@ function selfCloseOf(lower, start, openEnd) {
   return openEnd === -1 ? start + 8 : openEnd + 1;
 }
 
+/** Return the offset just past the closing tag that matches a div at `start`. */
+function matchingDivEnd(source, start) {
+  const tags = /<\/?div\b[^>]*>/gi;
+  tags.lastIndex = start;
+  let depth = 0;
+  for (let token; (token = tags.exec(source));) {
+    if (token[0].startsWith("</")) depth--;
+    else if (!token[0].endsWith("/>")) depth++;
+    if (depth === 0) return tags.lastIndex;
+  }
+  return -1;
+}
+
 /** Remove card wrappers that contain no visible text or media at all. */
 function removeEmptyCards(html) {
   const cards = [
@@ -268,6 +297,43 @@ function removeEmptyCaseStudyImageCards(html) {
       /data-testid="media-placeholder"/.test(body) &&
       !/<img\b[^>]*\bsrc\s*=\s*['"][^'"]+['"]/i.test(body);
     if (hasEmptyPlaceholders && !visibleText) removals.push({ start, end });
+  }
+  for (const item of removals.reverse()) {
+    html = html.slice(0, item.start) + html.slice(item.end);
+  }
+  return { html, removed: removals.length };
+}
+
+/** Remove responsive layout rows that contain only empty placeholder cells.
+ *  The home page's review section shipped with three decorative dark cells
+ *  holding nothing but `<br>`s, which looked like broken testimonial cards. */
+function removeEmptySmartLayouts(html) {
+  const layouts = [
+    ...html.matchAll(
+      /<div\b(?=[^>]*\bclass="[^"]*\bnode-smartLayout\b)[^>]*>/gi,
+    ),
+  ];
+  const removals = [];
+  for (const layout of layouts) {
+    const start = layout.index;
+    const end = matchingDivEnd(html, start);
+    if (end < 0) continue;
+    const body = html.slice(start + layout[0].length, end - "</div>".length);
+    const meaningful = body
+      .replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, "")
+      .replace(/<!--[\s\S]*?-->/g, "");
+    const visibleText = meaningful
+      .replace(/<[^>]+>/g, "")
+      .replace(/&(?:nbsp|#0*160|#x0*a0);/gi, " ")
+      .replace(/[\s\u200b\ufeff]/g, "");
+    const containsVisual =
+      /<(?:img|svg|video|canvas|iframe|object|embed|audio|input|button|table|hr|progress|meter)\b/i.test(
+        meaningful,
+      ) ||
+      /<a\b[^>]*\bhref\s*=/i.test(meaningful) ||
+      /\bbackground(?:-image)?\s*[:=]/i.test(meaningful) ||
+      /url\(/i.test(meaningful);
+    if (!visibleText && !containsVisual) removals.push({ start, end });
   }
   for (const item of removals.reverse()) {
     html = html.slice(0, item.start) + html.slice(item.end);
@@ -383,6 +449,89 @@ function addNavLandmark(html) {
   );
 }
 
+/** Keep the FAQ disclosure buttons labelled and their state exposed. The
+ *  export renders an icon-only <button> beside the question, so assistive tech
+ *  otherwise announces an unnamed button. The script runs on every page that
+ *  contains a toggle and is refreshed in place when this file changes. */
+const FAQ_TOGGLE_SCRIPT = [
+  "    /* faq-toggle */",
+  "    (function () {",
+  "      function sync(t) {",
+  "        var b = t.querySelector('button[data-testid=\"toggle-button\"]');",
+  "        if (!b) return;",
+  "        var s = t.querySelector('.node-toggleSummary');",
+  "        var q = s ? (s.innerText || '').replace(/\\s+/g, ' ').trim() : '';",
+  "        if (q) b.setAttribute('aria-label', 'Toggle answer: ' + q);",
+  "        b.setAttribute('aria-expanded', t.getAttribute('data-open') === 'true' ? 'true' : 'false');",
+  "      }",
+  "      var toggles = document.querySelectorAll('.toggle');",
+  "      for (var i = 0; i < toggles.length; i++) sync(toggles[i]);",
+  "      document.addEventListener('click', function (e) {",
+  "        var s = e.target && e.target.closest ? e.target.closest('.node-toggleSummary') : null;",
+  "        if (!s) return;",
+  "        var t = s.closest('.toggle');",
+  "        if (!t) return;",
+  '        t.setAttribute("data-open", t.getAttribute("data-open") === "true" ? "false" : "true");',
+  "        sync(t);",
+  "      });",
+  "    })();",
+];
+
+/** Point sibling-folder links at the file's real location.
+ *
+ *  The exported pages were cloned from one flat publication, so every page
+ *  links to `services.html`, `fullstack-web-ai-learnmore.html`, … as if all 20
+ *  files lived in the same directory. The app shell hides this by mapping the
+ *  base name back to a route, but direct navigation, search crawlers and any
+ *  no-JS visitor follow the literal href and land on a 404. Rewrite only bare
+ *  file names; links that already contain a path are left alone, which keeps
+ *  the pass idempotent. */
+function fixCrossFolderLinks(html, file) {
+  const folder = basename(dirname(file));
+  if (!PAGE_SETS.has(folder)) return { html, rewritten: 0 };
+  const otherFolder = folder === "home" ? "learn-more" : "home";
+  const otherPrefix = `../${otherFolder}/`;
+  const contactHref =
+    folder === "home" ? "contactus.html" : "../home/contactus.html";
+  let rewritten = 0;
+
+  const next = html.replace(
+    /(\bhref=")([^"]*)(")/gi,
+    (match, head, href, tail) => {
+      const value = href.trim();
+      // The privacy page used the SPA alias, which does not exist as a file.
+      if (value === "/contact-support" || value === "/contact-support/") {
+        rewritten++;
+        return `${head}${contactHref}${tail}`;
+      }
+      if (
+        !value ||
+        value.startsWith("#") ||
+        value.startsWith("/") ||
+        value.startsWith("//") ||
+        /^[a-z][a-z0-9+.-]*:/i.test(value)
+      )
+        return match;
+
+      const suffix = value.match(/[?#].*$/)?.[0] ?? "";
+      const name = value
+        .slice(0, value.length - suffix.length)
+        .replace(/^\.\//, "");
+      // A path (already relative to another folder) or a same-folder file is fine.
+      if (name.includes("/") || PAGE_SETS.get(folder).has(name)) return match;
+
+      const target = [...PAGE_SETS.get(otherFolder)].find(
+        (candidate) => candidate.toLowerCase() === name.toLowerCase(),
+      );
+      if (!target) return match;
+      rewritten++;
+      return `${head}${otherPrefix}${target}${suffix}${tail}`;
+    },
+  );
+
+  return { html: next, rewritten };
+}
+
 function fix(html, file) {
   const lineEnding = html.includes("\r\n") ? "\r\n" : "\n";
   const before = html.length;
@@ -393,6 +542,8 @@ function fix(html, file) {
   html = emptyCards.html;
   const emptyCaseStudyImages = removeEmptyCaseStudyImageCards(html);
   html = emptyCaseStudyImages.html;
+  const emptySmartLayouts = removeEmptySmartLayouts(html);
+  html = emptySmartLayouts.html;
 
   // 1b. Stale placeholder media (no PHP endpoint on a static host → 404).
   const staleMediaRemoved = (html.match(/<img\b[^>]*\bapi\/media\.php/gi) ?? [])
@@ -415,6 +566,10 @@ function fix(html, file) {
 
   // 1e. A real navigation landmark for assistive tech.
   html = addNavLandmark(html);
+
+  // 1f. Sibling-folder links must keep working without the app shell.
+  const crossFolderLinks = fixCrossFolderLinks(html, file);
+  html = crossFolderLinks.html;
 
   // 2. Shared Gamma stylesheets -> local vendor copy.
   html = html.replace(
@@ -536,27 +691,26 @@ function fix(html, file) {
   }
 
   // 6b. FAQ accordion behaviour — our own script (stripScripts keeps it,
-  //     marker comment below makes the injection idempotent).
-  if (
-    html.includes('data-testid="toggle-button"') &&
-    !html.includes("faq-toggle")
-  ) {
+  //     marker comment below makes the injection idempotent). The same script
+  //     gives each icon-only toggle an accessible name and expands state.
+  if (html.includes('data-testid="toggle-button"')) {
     html = html.replace(
-      /<\/body>/i,
-      [
-        "  <script data-static-fix>",
-        "    /* faq-toggle */",
-        "    document.addEventListener('click', function (e) {",
-        "      var s = e.target && e.target.closest ? e.target.closest('.node-toggleSummary') : null;",
-        "      if (!s) return;",
-        "      var t = s.closest('.toggle');",
-        "      if (!t) return;",
-        '      t.setAttribute("data-open", t.getAttribute("data-open") === "true" ? "false" : "true");',
-        "    });",
-        "  </script>",
-        "</body>",
-      ].join("\n"),
+      /<button\b([^>]*\bdata-testid="toggle-button"[^>]*)>/gi,
+      (match, attrs) =>
+        /\baria-label=/.test(attrs)
+          ? match
+          : `<button${attrs} aria-label="Toggle answer">`,
     );
+    const scriptTag = [
+      "  <script data-static-fix>",
+      ...FAQ_TOGGLE_SCRIPT,
+      "  </script>",
+    ].join("\n");
+    const existing =
+      /[ \t]*<script\b[^>]*data-static-fix[^>]*>[\s\S]*?faq-toggle[\s\S]*?<\/script>[ \t]*\r?\n?/i;
+    html = existing.test(html)
+      ? html.replace(existing, scriptTag)
+      : html.replace(/<\/body>/i, `${scriptTag}\n</body>`);
   }
 
   // 10. Restore emotion rules whose class is used in the markup but whose
@@ -615,9 +769,11 @@ function fix(html, file) {
     override: html.includes("data-static-fix") ? 1 : 0,
     emptyCardsRemoved: emptyCards.removed,
     emptyCaseStudyImageCardsRemoved: emptyCaseStudyImages.removed,
+    emptySmartLayoutsRemoved: emptySmartLayouts.removed,
     staleMediaRemoved,
     imagePreloadsRemoved,
     demotedH1,
+    crossFolderLinks: crossFolderLinks.rewritten,
     navLandmark:
       /<div\b[^>]*\brole="navigation"[^>]*\bdata-navbar-editor="true"/i.test(
         html,

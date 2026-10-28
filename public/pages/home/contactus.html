@@ -371,6 +371,11 @@
         margin-block: 0.4rem !important;
         line-height: 1.7;
       }
+      /* Text links are only ~20px tall; extend the hit area to the 24px touch
+         minimum without changing the footer's line box. */
+      .node-card.last-block a.chakra-text.link {
+        padding-block: 4px;
+      }
       .node-card.last-block .node-gridLayout.last-block .grid-col-controls {
         grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
         column-gap: clamp(0.75rem, 2vw, 1.5rem) !important;
@@ -601,6 +606,9 @@
         height: 100%;
         box-sizing: border-box;
         padding: 1.2rem;
+        /* Cards are always white, even inside the dark review sections, so they must
+           not inherit the section's light text colour. */
+        color: #211a37;
         border: 1px solid rgba(49, 19, 108, 0.12);
         border-radius: 1rem;
         background: #fff;
@@ -1010,6 +1018,53 @@
           display: block;
           max-width: 100%;
           overflow-x: auto;
+        }
+      }
+
+      /* Tablets between the stacked phone bar and the full desktop bar (about
+         705-800px) do not have room for the exported logo, five links, and CTA at
+         their full size. The link row then shrinks and every label is clipped to
+         "Ho...". Tighten the inline bar in that range so all labels stay whole
+         without adding a second bar row. */
+      @media (min-width: 44.0625rem) and (max-width: 50rem) {
+        [data-navbar-editor="true"] .navbar-view-content {
+          gap: 0.5rem !important;
+        }
+        .navbar-view-content > a.chakra-link {
+          flex: 0 0 auto !important;
+          width: clamp(8.5rem, 25vw, 12rem) !important;
+          height: auto !important;
+          aspect-ratio: 4.02;
+        }
+        [data-node-view-content-inner="navbar"] {
+          gap: 0.25rem 0.4rem !important;
+        }
+        .node-navbarLinks [data-selection-ring] {
+          gap: 0.25rem !important;
+          padding-left: 0 !important;
+        }
+        .node-navbarLinks .node-button,
+        .node-navbarButtons .node-button {
+          flex: 0 0 auto !important;
+          width: auto !important;
+          min-width: 0 !important;
+        }
+        .node-navbarLinks .node-button .button,
+        .node-navbarButtons .node-button .button {
+          width: auto !important;
+          min-width: 0 !important;
+          min-height: 34px;
+          padding-inline: 0.3125rem !important;
+          font-size: 0.8125rem !important;
+          white-space: nowrap !important;
+        }
+        .node-navbarLinks .node-button .chakra-text,
+        .node-navbarButtons .node-button .chakra-text {
+          display: block !important;
+          overflow: visible !important;
+          text-overflow: clip !important;
+          -webkit-line-clamp: unset !important;
+          word-break: normal !important;
         }
       }
 
@@ -10643,7 +10698,7 @@
                                                                               ><a
                                                                                 class="chakra-text link css-0"
                                                                                 rel="noopener nofollow"
-                                                                                href="fullstack-web-ai-learnmore.html"
+                                                                                href="../learn-more/fullstack-web-ai-learnmore.html"
                                                                                 ><span
                                                                                   >Custom
                                                                                   Full-Stack
@@ -10684,7 +10739,7 @@
                                                                               ><a
                                                                                 class="chakra-text link css-0"
                                                                                 rel="noopener nofollow"
-                                                                                href="mobile-app-learnmore.html"
+                                                                                href="../learn-more/mobile-app-learnmore.html"
                                                                                 ><span
                                                                                   >Custom
                                                                                   Android
@@ -10724,7 +10779,7 @@
                                                                               ><a
                                                                                 class="chakra-text link css-0"
                                                                                 rel="noopener nofollow"
-                                                                                href="ai-automations-learnmore.html"
+                                                                                href="../learn-more/ai-automations-learnmore.html"
                                                                                 ><span
                                                                                   >AI
                                                                                   Automations
@@ -10761,7 +10816,7 @@
                                                                               ><a
                                                                                 class="chakra-text link css-0"
                                                                                 rel="noopener nofollow"
-                                                                                href="custom-frameworks-learnmore.html"
+                                                                                href="../learn-more/custom-frameworks-learnmore.html"
                                                                                 ><span
                                                                                   >Custom
                                                                                   Frameworks
@@ -10790,7 +10845,7 @@
                                                                               ><a
                                                                                 class="chakra-text link css-0"
                                                                                 rel="noopener nofollow"
-                                                                                href="side-hustle-learnmore.html"
+                                                                                href="../learn-more/side-hustle-learnmore.html"
                                                                                 ><span
                                                                                   >Side
                                                                                   Hustle
@@ -11185,19 +11240,35 @@
     </div>
     <script data-static-fix>
       /* faq-toggle */
-      document.addEventListener("click", function (e) {
-        var s =
-          e.target && e.target.closest
-            ? e.target.closest(".node-toggleSummary")
-            : null;
-        if (!s) return;
-        var t = s.closest(".toggle");
-        if (!t) return;
-        t.setAttribute(
-          "data-open",
-          t.getAttribute("data-open") === "true" ? "false" : "true",
-        );
-      });
+      (function () {
+        function sync(t) {
+          var b = t.querySelector('button[data-testid="toggle-button"]');
+          if (!b) return;
+          var s = t.querySelector(".node-toggleSummary");
+          var q = s ? (s.innerText || "").replace(/\s+/g, " ").trim() : "";
+          if (q) b.setAttribute("aria-label", "Toggle answer: " + q);
+          b.setAttribute(
+            "aria-expanded",
+            t.getAttribute("data-open") === "true" ? "true" : "false",
+          );
+        }
+        var toggles = document.querySelectorAll(".toggle");
+        for (var i = 0; i < toggles.length; i++) sync(toggles[i]);
+        document.addEventListener("click", function (e) {
+          var s =
+            e.target && e.target.closest
+              ? e.target.closest(".node-toggleSummary")
+              : null;
+          if (!s) return;
+          var t = s.closest(".toggle");
+          if (!t) return;
+          t.setAttribute(
+            "data-open",
+            t.getAttribute("data-open") === "true" ? "false" : "true",
+          );
+          sync(t);
+        });
+      })();
     </script>
   </body>
 </html>
