@@ -232,6 +232,14 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
         opacity: 1 !important;
         transform: none !important;
       }
+      /* The FAQ toggle summary is an "annotatable" block, so Gamma's animation CSS
+         also hides its inner [data-node-view-content] wrapper. That left every FAQ
+         question invisible while its answer stayed visible. */
+      .node-toggleSummary [data-node-view-content],
+      .node-toggleSummary .themed-heading {
+        opacity: 1 !important;
+        transform: none !important;
+      }
 
       /* Keep body copy readable and consistently aligned across page layouts. */
       .gml-paragraph__content,
@@ -372,6 +380,15 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
         position: relative !important;
         top: auto !important;
         z-index: 1002 !important;
+      }
+
+      /* The exported video/embed blocks carry a static "Loading..." spinner from the
+         removed Gamma runtime. It never goes away after the iframe loads, so hide it
+         and let the embedded video use the whole frame. */
+      .node-video .chakra-spinner,
+      .node-embed .chakra-spinner,
+      .html-embed-viewer .chakra-spinner {
+        display: none !important;
       }
 
       /* Keep paired CTA controls separated, centered, and able to wrap on mobile. */
@@ -1028,6 +1045,46 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
           min-width: 0;
           max-width: 100%;
         }
+        /* Gamma keeps the desktop em-based card padding at every viewport size. On a
+           375px phone that leaves only ~249px of usable content and squeezes headings
+           into one word per line. Use phone-sized padding instead. */
+        .card-wrapper {
+          --card-inner-padding: clamp(1.25rem, 5vw, 1.6rem)
+            clamp(1rem, 4.4vw, 1.35rem) !important;
+        }
+        /* Cards whose layout reserves a decorative side column (usually a large
+           background image) must give that space back to the content on a phone. */
+        .card-content > div {
+          grid-template-columns: minmax(0, 1fr) !important;
+        }
+        .card-content > div > .node-cardAccentLayoutItem {
+          display: none !important;
+        }
+        /* Every exported multi-column card grid (UPI feature, FAQ pairs, team rows,
+           comparison tables) collapses to one readable column on a phone. */
+        .node-card .grid-col-controls {
+          grid-template-columns: minmax(0, 1fr) !important;
+        }
+        .node-card .grid-col-controls .grid-cell {
+          grid-column: auto !important;
+          grid-row: auto !important;
+          width: auto !important;
+          min-width: 0 !important;
+        }
+        /* The exported grids pull 1.22em of padding back out with negative margins.
+           Match those to the new card padding so the grid never spills past the
+           viewport. The `add-column` control is an editor-only affordance and has
+           no place in the static page. */
+        .node-card .node-gridLayout {
+          --grid-padding: 1rem !important;
+          margin-inline: -1rem !important;
+        }
+        .node-card .node-gridLayout .grid-cell {
+          padding-inline: 1rem !important;
+        }
+        .add-column {
+          display: none !important;
+        }
         /* Smart-layout rows place cards on an 18-track grid whose desktop column gaps
            alone are wider than a phone screen. That collapsed every track to 0 and
            pushed the trailing cards off the right edge, so stack the cards instead. */
@@ -1058,6 +1115,47 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
           display: block;
           max-width: 100%;
           overflow-x: auto;
+        }
+        /* The About page's alternating timeline gives each step only half of the
+           card width and then reserves 5em of that for the centre line, leaving a
+           35px text column at 375px. Drop the centre line and put every step in one
+           full-width column with its number badge beside the text. */
+        .node-smartLayout .css-1aegn86 {
+          grid-template-columns: minmax(0, 1fr) !important;
+          grid-row-gap: 1.5rem !important;
+          justify-content: stretch !important;
+        }
+        .node-smartLayout .css-1aegn86 > * {
+          grid-column: 1 !important;
+          grid-row: auto !important;
+          width: 100% !important;
+        }
+        .node-smartLayout .css-1aegn86 > .css-fq9rba,
+        .node-smartLayout .css-1aegn86 > .css-1lc2ous {
+          display: none !important;
+        }
+        .node-smartLayout .css-1aegn86 .css-1akxzuq,
+        .node-smartLayout .css-1aegn86 .css-ccosfs {
+          grid-column: 1 !important;
+          grid-row: auto !important;
+          align-items: flex-start !important;
+          gap: 0.9rem !important;
+          width: 100% !important;
+          padding-inline: 0 !important;
+        }
+        .node-smartLayout .css-1aegn86 .css-1jubuc1,
+        .node-smartLayout .css-1aegn86 .css-98vp24 {
+          position: static !important;
+          inset: auto !important;
+          transform: none !important;
+          flex: 0 0 auto !important;
+        }
+        .node-smartLayout .css-1aegn86 .gml-heading__content {
+          align-self: flex-start !important;
+          text-align: start !important;
+        }
+        .node-smartLayout .css-1aegn86 .css-1o30dsx {
+          display: none !important;
         }
       }
 
