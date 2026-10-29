@@ -1157,6 +1157,11 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
         .node-smartLayout .css-1aegn86 .css-1o30dsx {
           display: none !important;
         }
+        /* The connector line beside each timeline badge still points to the removed
+           desktop centre line and extends past the right edge of a phone. */
+        .node-smartLayout .css-1aegn86 [data-testid="timeline-line"] {
+          display: none !important;
+        }
       }
 
       /* Tablets between the stacked phone bar and the full desktop bar (about
