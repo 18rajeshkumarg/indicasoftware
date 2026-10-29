@@ -1169,7 +1169,8 @@ svg {
     grid-column: 1 !important;
     grid-row: auto !important;
     width: 100% !important;
-    height: clamp(8rem, 46vw, 12rem) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
     min-height: 0 !important;
     margin: 0 0 0.75rem !important;
     overflow: hidden !important;
@@ -1192,6 +1193,45 @@ svg {
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
+    transform: none !important;
+    translate: none !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .card-content
+    > div
+    > .node-cardAccentLayoutItem
+    [data-testid="card-accent-layout-item"],
+  .card-content > div > .node-cardAccentLayoutItem [data-layout-cut="behind"],
+  .card-content
+    > div
+    > .node-cardAccentLayoutItem
+    [data-layout-cut="behind"]
+    * {
+    transform: none !important;
+    translate: none !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+  .card-content
+    > div
+    > .node-cardAccentLayoutItem
+    [data-layout-cut="behind"]
+    > * {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
   }
   .card-content
     > div
@@ -1206,13 +1246,30 @@ svg {
     display: block !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
+    object-position: center center !important;
   }
   .node-card img,
-  .node-card video,
-  .gml-card img {
+  .gml-card img,
+  .node-image img {
+    display: block !important;
     max-width: 100% !important;
-    height: auto;
-    object-fit: contain;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+  .node-card video,
+  .gml-card video {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  .node-card .node-image .image.cropped-image,
+  .gml-card .node-image .image.cropped-image {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    overflow: visible !important;
   }
 }
