@@ -247,6 +247,107 @@ function renderTestimonials(doc, root, items) {
   }
 }
 
+function renderTeamMembers(doc, root, items) {
+  const list = root.querySelector("[data-indica-team-list]");
+  if (!list) return;
+  list.replaceChildren();
+  if (!items.length) {
+    list.append(
+      textElement(doc, "p", "Our team information will appear here soon."),
+    );
+    return;
+  }
+
+  for (const item of items) {
+    const card = doc.createElement("article");
+    card.className = "indica-managed-card indica-team-card";
+    if (item.image) {
+      const image = doc.createElement("img");
+      image.className = "indica-content-image indica-team-image";
+      image.src = apiUrl(
+        `api/media.php?name=${encodeURIComponent(item.image)}`,
+      ).href;
+      image.alt = `${item.name || "Team member"}`;
+      image.loading = "lazy";
+      image.style.cssText =
+        "display:block;width:100%;height:auto;max-height:22rem;aspect-ratio:4/3;object-fit:cover;object-position:center top;border-radius:.75rem;margin-bottom:1rem";
+      image.addEventListener("error", () => image.remove(), { once: true });
+      card.append(image);
+    }
+    card.append(textElement(doc, "h3", item.name || "Team member"));
+    if (item.position)
+      card.append(textElement(doc, "p", item.position, "indica-case-company"));
+    if (item.profession) card.append(textElement(doc, "p", item.profession));
+    if (item.description) card.append(textElement(doc, "p", item.description));
+
+    const links = doc.createElement("div");
+    links.className = "indica-team-links";
+    links.style.cssText =
+      "display:flex;flex-wrap:wrap;gap:.5rem 1rem;margin-top:1rem";
+    if (item.email) {
+      const email = doc.createElement("a");
+      email.href = `mailto:${item.email}`;
+      email.textContent = "Email";
+      email.style.cssText = "color:#31136c;font-weight:650";
+      links.append(email);
+    }
+    if (item.phone) {
+      const phone = doc.createElement("a");
+      phone.href = `tel:${item.phone.replace(/[^+0-9]/g, "")}`;
+      phone.textContent = "Call";
+      phone.style.cssText = "color:#31136c;font-weight:650";
+      links.append(phone);
+    }
+    for (const [label, value] of [
+      ["LinkedIn", item.linkedin],
+      ["Instagram", item.instagram],
+      ["Website", item.website],
+    ]) {
+      try {
+        const url = new URL(value || "");
+        if (url.protocol !== "https:") continue;
+        const link = doc.createElement("a");
+        link.href = url.href;
+        link.rel = "noopener noreferrer";
+        link.textContent = label;
+        link.style.cssText = "color:#31136c;font-weight:650";
+        links.append(link);
+      } catch {
+        // Invalid optional profile links are omitted.
+      }
+    }
+    if (links.childElementCount) card.append(links);
+    list.append(card);
+  }
+}
+
+function renderAboutVideo(doc, root, item) {
+  if (!root || !item) return;
+  if (item.removed) {
+    root.hidden = true;
+    root.style.display = "none";
+    return;
+  }
+  if (!item.name) return;
+
+  const video = doc.createElement("video");
+  video.src = apiUrl(
+    `api/media.php?type=video&name=${encodeURIComponent(item.name)}`,
+  ).href;
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.setAttribute(
+    "aria-label",
+    item.title || "Indica Software company video",
+  );
+  video.style.cssText =
+    "display:block;width:100%;height:auto;max-height:70vh;aspect-ratio:16/9;background:#08071b;border-radius:16px";
+  root.hidden = false;
+  root.style.removeProperty("display");
+  root.replaceChildren(video);
+}
+
 async function loadManagedContent(doc, route) {
   const requests = [];
   // Replace the static export snapshot with the current admin-published data.
@@ -265,6 +366,15 @@ async function loadManagedContent(doc, route) {
       throw new Error("Invalid content response.");
     return data.items;
   };
+  const fetchManagedItem = async (type) => {
+    const url = apiUrl(`api/content.php?type=${encodeURIComponent(type)}`);
+    url.searchParams.set("_", Date.now().toString());
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok)
+      throw new Error(`Content request failed (${response.status}).`);
+    const data = await response.json();
+    return data.item ?? null;
+  };
   // Every exported route that contains these managed blocks reads the same
   // published admin content, including each Learn More page.
   const caseRoot = doc.querySelector("[data-indica-case-studies]");
@@ -281,7 +391,23 @@ async function loadManagedContent(doc, route) {
         .then((items) => renderTestimonials(doc, reviewRoot, items))
         .catch(() => renderTestimonials(doc, reviewRoot, [])),
     );
-  if (route === "/contactus") {
+  if (route === "/aboutus") {
+    const teamRoot = doc.querySelector("[data-indica-team]");
+    const videoRoot = doc.querySelector("[data-indica-about-video]");
+    if (teamRoot)
+      requests.push(
+        fetchManagedItems("team")
+          .then((items) => renderTeamMembers(doc, teamRoot, items))
+          .catch(() => renderTeamMembers(doc, teamRoot, [])),
+      );
+    if (videoRoot)
+      requests.push(
+        fetchManagedItem("about-video")
+          .then((item) => renderAboutVideo(doc, videoRoot, item))
+          .catch(() => {}),
+      );
+  }
+  {
     const form = doc.querySelector("[data-indica-inquiry-form]");
     if (form && !form.dataset.bound) {
       form.dataset.bound = "true";
@@ -296,6 +422,14 @@ async function loadManagedContent(doc, route) {
           services: fields.getAll("services[]"),
           query: fields.get("query"),
           website: fields.get("website"),
+          page: `#${route}`,
+          device: {
+            platform: navigator.platform || "",
+            language: navigator.language || "",
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+            screen: { width: screen.width, height: screen.height },
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+          },
         };
         if (submit) submit.disabled = true;
         if (status) {

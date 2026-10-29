@@ -40,12 +40,21 @@ an S3 bucket, …). The build uses the GitHub Pages base path
 
 ## PHP content admin and contact inquiries
 
-Client case studies, client reviews, and contact inquiries use the PHP backend
-in `backend/`. PHP 8.1+ is required. Case studies
-and reviews are saved in private JSON storage; uploaded images and inquiry
-records are kept outside the public document root. The public Case Studies
-page fetches published entries when opened. The Contact Us form posts to the
-PHP inquiry endpoint, and submissions are visible only in the admin.
+Client case studies, client reviews, team profiles, About Us video, and contact
+inquiries use the PHP backend in `backend/`. PHP 8.1+ is required. Content and
+inquiries are stored in private JSON storage; uploaded images and videos are
+kept outside the public document root. Published case studies, team profiles,
+and About Us video are fetched from the API when their pages open. The admin
+can upload case study/team images, replace or remove the About Us video, and
+add, edit, publish, or remove team profiles.
+
+Contact and Coming Soon forms store the values a visitor submits plus the
+submission time, page route, and basic browser/device details (browser
+user-agent, platform, language, timezone, screen size, and viewport size).
+This metadata is sent only when the visitor submits a form; the site does not
+record these details for ordinary browsing. The form and Privacy Policy
+disclose this collection. Administrators can view and delete submissions or
+download `.csv`, `.xlsx`, and PDF exports from the admin portal.
 
 For local development, open two terminals. In the first, configure the PHP
 server and start it from the project root:
@@ -59,7 +68,7 @@ npm run backend:dev
 
 In the second terminal, run Vite as usual with `npm run dev`. Vite proxies
 `/api/` and `/admin/` to PHP. Open <http://localhost:5173/admin/> to sign in
-and manage case studies, reviews, and inquiries. Do not commit the password
+and manage case studies, reviews, team members, About Us video, and inquiries. Do not commit the password
 hash or the storage directory.
 
 `npm run build` copies the PHP endpoints into `dist/`. Deploy `dist/` to a
@@ -281,6 +290,6 @@ still references `/src/main.jsx`, so an unbuilt source tree cannot be deployed.
 
 ## Deploying the PHP admin and inquiry API on Render
 
-`render.yaml` and `Dockerfile` define the PHP API as a Render web service with a persistent disk for case studies, review data, inquiry records, and uploaded images. Create it from the Render dashboard with **New > Blueprint** and select this public repository. Render will prompt you for `INDICA_ADMIN_USERNAME` and `INDICA_ADMIN_PASSWORD_HASH`; generate the password hash locally with `php -r "echo password_hash('your-long-password', PASSWORD_DEFAULT);"` and enter it only in Render's secret prompt. Do not commit the hash or storage data.
+`render.yaml` and `Dockerfile` define the PHP API as a Docker web service with persistent storage for case studies, review data, team profiles, uploaded media, and inquiry records. The current admin/API deployment is Railway at `https://indicasoftware-content-api-production.up.railway.app`; its `/admin/` route requires `INDICA_ADMIN_USERNAME` and `INDICA_ADMIN_PASSWORD_HASH` to be configured in the service environment. The repository's Render Blueprint is an alternate host setup. Generate the password hash locally with `php -r "echo password_hash('your-long-password', PASSWORD_DEFAULT);"` and enter it only in the host's secret settings. Never commit the hash or private storage.
 
-The service uses a paid compute plan and a persistent disk because free Render web services do not retain local files. Render lists persistent disks at $0.25 per GB per month, in addition to compute charges. Once the service is deployed, set the GitHub repository Actions variable `VITE_API_BASE_URL` to its HTTPS URL, then run the `Deploy website to GitHub Pages` workflow again. The admin will be available at `<service-url>/admin/`.
+The service needs persistent disk storage because content and uploaded media must survive container restarts. Set the GitHub Actions variable `VITE_API_BASE_URL` to the PHP service's HTTPS URL, then run the `Deploy website to GitHub Pages` workflow again if the backend host changes. The admin is available at `<service-url>/admin/`. Video uploads accept MP4/WebM files up to 45 MB.

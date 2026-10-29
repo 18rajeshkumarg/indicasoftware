@@ -1226,6 +1226,7 @@ const INQUIRY_FORM = `
         ${SERVICES.map((service) => `<label class="indica-service-option"><input type="checkbox" name="services[]" value="${esc(service.name)}"><span>${esc(service.name)}</span></label>`).join("\n        ")}
       </fieldset>
       <label class="indica-query-label">Your query<textarea name="query" rows="5" maxlength="5000" required></textarea></label>
+      <p class="indica-data-notice">When you submit this form, we store the details you provide and basic browser/device information to respond to your inquiry. A hashed connection address is used to limit spam. See our <a href="privacypolicy.html">Privacy Policy</a>.</p>
       <label class="indica-honeypot" aria-hidden="true">Leave this field blank<input name="website" tabindex="-1" autocomplete="off"></label>
       <button class="indica-submit" type="submit">Send query</button>
       <p class="indica-form-status" data-indica-form-status role="status" aria-live="polite"></p>
@@ -1269,6 +1270,20 @@ const TECHNOLOGY_SECTION = `
         <li>Cloud deployment, monitoring, and ongoing maintenance</li>
       </ul></article>
     </div>
+  </section>`;
+
+const TEAM_SECTION = `
+  <section class="indica-managed-section" data-indica-team>
+    <h2>Meet Our Team</h2>
+    <p>Our team brings together the people and skills behind our work.</p>
+    <div class="indica-managed-grid" data-indica-team-list><p>Our team information will appear here soon.</p></div>
+  </section>`;
+
+const PRIVACY_FORM_NOTICE = `
+  <section class="indica-managed-section" data-indica-data-privacy>
+    <h2>Information submitted through our forms</h2>
+    <p>We receive the contact details and message you submit so we can respond to your inquiry. When a form is submitted, we also record the submission time, the page route, and basic browser/device details: browser user-agent, platform, language, timezone, screen size, and viewport size. A hashed connection address is used for spam rate limiting; older rate-limit timestamps are cleared when new submissions arrive. We do not collect these form details just because you visit or browse the site.</p>
+    <p>Submissions are stored in the private content service and are available to authorized administrators for handling inquiries. Administrators can export or delete submissions. Contact us using the details on our Contact Us page to ask about a submission or request its removal.</p>
   </section>`;
 
 function insertBeforeFooter(html, marker, markup, file) {
@@ -1642,6 +1657,31 @@ let canonicalFooter;
     "technologies.html",
   );
   write(techPath, techHtml);
+
+  const aboutPath = path.join(HOME, "aboutus.html");
+  let aboutHtml = read(aboutPath);
+  if (!aboutHtml.includes("data-indica-about-video")) {
+    aboutHtml = aboutHtml.replace(
+      /(<div\b[^>]*class="[^"]*\bnode-video\b[^"]*"[^>]*)(>)/,
+      "$1 data-indica-about-video$2",
+    );
+  }
+  aboutHtml = insertBeforeFooter(
+    aboutHtml,
+    "data-indica-team",
+    TEAM_SECTION,
+    "aboutus.html",
+  );
+  write(aboutPath, aboutHtml);
+
+  const privacyPath = path.join(HOME, "privacypolicy.html");
+  const privacyHtml = insertBeforeFooter(
+    read(privacyPath),
+    "data-indica-data-privacy",
+    PRIVACY_FORM_NOTICE,
+    "privacypolicy.html",
+  );
+  write(privacyPath, privacyHtml);
 }
 
 /* 8 — the Coming Soon page, cloned from the contact page's shell */

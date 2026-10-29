@@ -1,5 +1,11 @@
 FROM php:8.3-apache
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libzip-dev \
+    && docker-php-ext-install zip \
+    && rm -rf /var/lib/apt/lists/* \
+    && printf 'upload_max_filesize=45M\npost_max_size=52M\nmax_execution_time=120\n' > /usr/local/etc/php/conf.d/indica-uploads.ini
+
 RUN set -eux; \
     rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf; \
     a2enmod mpm_prefork headers; \
