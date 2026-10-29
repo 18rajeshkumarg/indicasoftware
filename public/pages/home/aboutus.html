@@ -111,6 +111,11 @@
         opacity: 1 !important;
         transform: none !important;
       }
+      /* The exported embed wrapper is left transparent when Gamma's player
+         runtime is removed. Reveal the real Loom iframe in the static page. */
+      .node-video .css-1qykxao {
+        opacity: 1 !important;
+      }
 
       /* Keep body copy readable and consistently aligned across page layouts. */
       .gml-paragraph__content,
@@ -809,6 +814,12 @@
         max-width: 100%;
       }
       @media (max-width: 44rem) {
+        .gml-title__content.gml-display {
+          max-width: 100% !important;
+          font-size: clamp(2rem, 10vw, 3rem) !important;
+          line-height: 1.1 !important;
+          text-wrap: balance;
+        }
         /* The exported bar hard-codes a 75px height, but the phone layout stacks the
            logo above two wrapped link rows (~133px tall). Let the bar size to its
            content so the logo is not clipped off the top of the viewport. */
@@ -12891,7 +12902,7 @@
                                                                   "
                                                                 >
                                                                   <iframe
-                                                                    src="https://www.loom.com/embed/fe6cb0f102834d799b6dc4a1dc1d9280"
+                                                                    src="https://www.loom.com/embed/fe6cb0f102834d799b6dc4a1dc1d9280?autoplay=1&amp;muted=1"
                                                                     style="
                                                                       top: 0;
                                                                       left: 0;
@@ -12902,8 +12913,12 @@
                                                                     "
                                                                     allowfullscreen
                                                                     scrolling="no"
+                                                                    title="Indica Software introduction by founder Rajesh Kumar G"
                                                                     allow="
-                                                                      encrypted-media *;
+                                                                      autoplay https://www.loom.com;
+                                                                      encrypted-media https://www.loom.com;
+                                                                      picture-in-picture https://www.loom.com;
+                                                                      fullscreen https://www.loom.com;
                                                                     "
                                                                   ></iframe>
                                                                 </div>
@@ -13649,8 +13664,8 @@
                                                                                   width: 100%;
                                                                                 }</style
                                                                               ><img
-                                                                                alt=""
-                                                                                src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/sao8drwp24ekt98/206f1305bdbd4d78ab37c70b6b6951d7/original/Founder-CEO-Image.png"
+                                                                                alt="Rajesh Kumar G, Founder and CEO of Indica Software"
+                                                                                src="../../Founder-CEO-Rajesh-Kumar-G.jpeg"
                                                                                 class="chakra-image css-zec7a"
                                                                               />
                                                                             </div>

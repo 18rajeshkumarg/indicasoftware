@@ -688,6 +688,7 @@ export default function App() {
           data-route={next}
           className={`app-frame${next === painted ? " app-frame--shown" : ""}`}
           src={srcFor(next)}
+          allow="autoplay https://www.loom.com; encrypted-media https://www.loom.com; picture-in-picture https://www.loom.com; fullscreen https://www.loom.com"
           title={titles[next] || `Indica Software — ${next}`}
         />
       ))}
