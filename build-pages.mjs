@@ -1226,7 +1226,8 @@ const INQUIRY_FORM = `
         ${SERVICES.map((service) => `<label class="indica-service-option"><input type="checkbox" name="services[]" value="${esc(service.name)}"><span>${esc(service.name)}</span></label>`).join("\n        ")}
       </fieldset>
       <label class="indica-query-label">Your query<textarea name="query" rows="5" maxlength="5000" required></textarea></label>
-      <p class="indica-data-notice">When you submit this form, we store the details you provide and basic browser/device information to respond to your inquiry. A hashed connection address is used to limit spam. See our <a href="privacypolicy.html">Privacy Policy</a>.</p>
+      <p class="indica-data-notice">When you submit this query form, we get your query, and our support team will connect with you shorthly! We Keep Updated to our clients!. See our <a href="https://18rajeshkumarg.github.io/indicasoftware/pages/home/privacypolicy.html">Privacy Policy</a>.</p>
+      <p class="indica-support-promise"><strong>100% Support &amp; Guidance Provided By INDICA SOFTWARE</strong></p>
       <label class="indica-honeypot" aria-hidden="true">Leave this field blank<input name="website" tabindex="-1" autocomplete="off"></label>
       <button class="indica-submit" type="submit">Send query</button>
       <p class="indica-form-status" data-indica-form-status role="status" aria-live="polite"></p>
@@ -1377,6 +1378,20 @@ function placeHomeCaseStudies(html) {
   return html;
 }
 
+function insertWelcomeMessage(html) {
+  if (html.includes("data-indica-welcome-message")) return html;
+  const heading = /<h1\b[^>]*>[\s\S]*?<\/h1\s*>/i.exec(html);
+  if (!heading) {
+    warn("index.html: homepage hero heading not found for welcome message");
+    return html;
+  }
+  const wrapperStart = html.lastIndexOf("<div", heading.index);
+  const wrapperEnd = wrapperStart < 0 ? -1 : closeOf(html, wrapperStart);
+  if (wrapperEnd < 0) return html;
+  const message = '<p data-indica-welcome-message style="margin:1rem 0;max-width:52rem;font-size:clamp(1rem,2vw,1.25rem);line-height:1.6">Welcome to INDICA SOFTWARE! We Give 100% Transforming ideas into market-leading software products with a product-first philosophy | Custom AI &amp; Software Solution</p>';
+  return `${html.slice(0, wrapperEnd)}\n${message}\n${html.slice(wrapperEnd)}`;
+}
+
 /** FAQ accordions on services.html: open them and keep them clickable. */
 function fixFaq(html) {
   // element attributes only — the CSS rule [data-open="false"] stays intact
@@ -1522,6 +1537,7 @@ const learnBlock = extractLearnBlock(originalHome);
 log("\n1. index.html — services grid");
 let home = rebuildGrid(originalHome, { learnBlock, label: "index" });
 home = globalPass(home, "index.html");
+home = insertWelcomeMessage(home);
 write(path.join(HOME, "index.html"), home);
 
 /* 2 — services grid + drop the Continue button */
