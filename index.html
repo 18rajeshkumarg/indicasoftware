@@ -79,5 +79,45 @@
       data-agent-id="skbrand_ee3e45d2-cbf1-4a97-816c-c51cf177ce4e"
       data-position="bottom-right"
     ></script>
+    <script>
+      (() => {
+        const styleId = "sketricgen-responsive-panel";
+        const css = `
+          body .sketric-embed-container .sketric-iframe-container {
+            width: calc(100vw - 32px) !important;
+            max-width: 360px !important;
+            height: 72vh !important;
+            max-height: 560px !important;
+            height: 72dvh !important;
+            max-height: min(560px, 72dvh) !important;
+          }
+        `;
+
+        const applyPanelSizing = () => {
+          const providerStyle = [
+            ...document.head.querySelectorAll("style"),
+          ].some((style) =>
+            style.textContent.includes(".sketric-iframe-container"),
+          );
+          if (!providerStyle) return false;
+
+          let override = document.getElementById(styleId);
+          if (!override) {
+            override = document.createElement("style");
+            override.id = styleId;
+            override.textContent = css;
+          }
+          document.head.append(override);
+          return true;
+        };
+
+        if (!applyPanelSizing()) {
+          const observer = new MutationObserver(() => {
+            if (applyPanelSizing()) observer.disconnect();
+          });
+          observer.observe(document.head, { childList: true, subtree: true });
+        }
+      })();
+    </script>
   </body>
 </html>
