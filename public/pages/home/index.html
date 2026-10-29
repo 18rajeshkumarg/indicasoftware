@@ -1052,13 +1052,9 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
           --card-inner-padding: clamp(1.25rem, 5vw, 1.6rem)
             clamp(1rem, 4.4vw, 1.35rem) !important;
         }
-        /* Cards whose layout reserves a decorative side column (usually a large
-           background image) must give that space back to the content on a phone. */
+        /* Collapse the accent-image layout to one phone-sized content column. */
         .card-content > div {
           grid-template-columns: minmax(0, 1fr) !important;
-        }
-        .card-content > div > .node-cardAccentLayoutItem {
-          display: none !important;
         }
         /* Every exported multi-column card grid (UPI feature, FAQ pairs, team rows,
            comparison tables) collapses to one readable column on a phone. */
@@ -1221,6 +1217,218 @@ Indica Software delivers enterprise-grade web solutions with integrated UPI paym
         }
         .node-navbarLinks [data-selection-ring] {
           gap: 0.05rem 0.1rem !important;
+        }
+      }
+
+      /* Accessible, compact mobile navigation shared by every exported page. */
+      .indica-mobile-nav-toggle {
+        display: none;
+      }
+      @media (max-width: 44rem) {
+        html body {
+          --doc-padding-top: 5.25rem !important;
+        }
+        [data-navbar-editor="true"] {
+          padding: 0.35rem 0.75rem !important;
+        }
+        [data-navbar-editor="true"]
+          > .ProseMirror
+          > .node-navbar
+          > [data-node-view-wrapper]
+          > div {
+          min-height: 3.75rem !important;
+        }
+        .navbar-view-content {
+          position: relative !important;
+          display: grid !important;
+          grid-template-columns: minmax(0, 1fr) 2.75rem !important;
+          grid-template-rows: 2.75rem auto !important;
+          align-items: center !important;
+          justify-content: stretch !important;
+          gap: 0 !important;
+          width: 100% !important;
+          min-height: 3.75rem !important;
+        }
+        .navbar-view-content > a.chakra-link {
+          grid-column: 1 !important;
+          grid-row: 1 !important;
+          width: min(9rem, 54vw) !important;
+          height: auto !important;
+          aspect-ratio: 4.02;
+        }
+        .navbar-view-content > [data-node-view-content] {
+          display: contents !important;
+        }
+        .indica-mobile-nav-toggle {
+          grid-column: 2 !important;
+          grid-row: 1 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 5px !important;
+          width: 2.75rem !important;
+          height: 2.75rem !important;
+          padding: 0 !important;
+          border: 1px solid rgba(49, 19, 108, 0.2) !important;
+          border-radius: 0.75rem !important;
+          background: #fff !important;
+          color: #31136c !important;
+          box-shadow: 0 0.25rem 0.7rem -0.4rem rgba(13, 10, 44, 0.6);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .indica-mobile-nav-toggle span {
+          display: block;
+          width: 1.2rem;
+          height: 2px;
+          border-radius: 2px;
+          background: currentColor;
+          transition:
+            transform 0.18s ease,
+            opacity 0.18s ease;
+        }
+        .indica-mobile-nav-toggle:focus-visible {
+          outline: 3px solid rgba(129, 82, 225, 0.55);
+          outline-offset: 3px;
+        }
+        .indica-mobile-menu-open .indica-mobile-nav-toggle span:first-child {
+          transform: translateY(7px) rotate(45deg);
+        }
+        .indica-mobile-menu-open .indica-mobile-nav-toggle span:nth-child(2) {
+          opacity: 0;
+        }
+        .indica-mobile-menu-open .indica-mobile-nav-toggle span:last-child {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+        .navbar-view-content [data-node-view-content-inner="navbar"] {
+          position: absolute !important;
+          top: calc(100% + 0.5rem) !important;
+          right: 0 !important;
+          left: 0 !important;
+          z-index: 1004 !important;
+          display: none !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          justify-content: flex-start !important;
+          gap: 0.35rem !important;
+          width: 100% !important;
+          max-height: min(72vh, 32rem);
+          overflow-y: auto;
+          padding: 0.65rem !important;
+          border: 1px solid rgba(129, 82, 225, 0.3);
+          border-radius: 1rem;
+          background: #0d0a2c;
+          box-shadow: 0 1rem 2rem -0.75rem rgba(13, 10, 44, 0.8);
+        }
+        [data-navbar-editor="true"].indica-mobile-menu-open
+          .navbar-view-content
+          [data-node-view-content-inner="navbar"] {
+          display: flex !important;
+        }
+        .navbar-view-content .node-navbarLinks,
+        .navbar-view-content .node-navbarButtons {
+          flex: 0 0 auto !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          margin: 0 !important;
+        }
+        .navbar-view-content .node-navbarLinks [data-selection-ring],
+        .navbar-view-content .node-navbarLinks > [data-node-view-wrapper],
+        .navbar-view-content .node-navbarButtons > [data-node-view-wrapper] {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 0.25rem !important;
+          width: 100% !important;
+          padding: 0 !important;
+        }
+        .navbar-view-content .node-navbarLinks .node-button,
+        .navbar-view-content .node-navbarButtons .node-button,
+        .navbar-view-content .node-navbarLinks .node-button .button,
+        .navbar-view-content .node-navbarButtons .node-button .button {
+          flex: 0 0 auto !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          min-height: 2.75rem !important;
+          justify-content: flex-start !important;
+          padding: 0.6rem 0.85rem !important;
+          border-radius: 0.65rem !important;
+          font-size: 0.95rem !important;
+          text-align: left !important;
+          white-space: normal !important;
+        }
+        .navbar-view-content .node-navbarLinks .node-button .chakra-text,
+        .navbar-view-content .node-navbarButtons .node-button .chakra-text {
+          display: block !important;
+          overflow: visible !important;
+          text-overflow: clip !important;
+          -webkit-line-clamp: unset !important;
+          word-break: normal !important;
+        }
+        .navbar-view-content .node-navbarButtons .node-button .button {
+          justify-content: center !important;
+          text-align: center !important;
+        }
+
+        /* Keep the exported card artwork visible as a responsive image panel. */
+        .card-content > div > .node-cardAccentLayoutItem {
+          position: relative !important;
+          display: block !important;
+          grid-column: 1 !important;
+          grid-row: auto !important;
+          width: 100% !important;
+          height: clamp(8rem, 46vw, 12rem) !important;
+          min-height: 0 !important;
+          margin: 0 0 0.75rem !important;
+          overflow: hidden !important;
+          border-radius: 0.8rem;
+        }
+        .card-content
+          > div
+          > .node-cardAccentLayoutItem
+          > [data-node-view-wrapper],
+        .card-content
+          > div
+          > .node-cardAccentLayoutItem
+          [data-testid="card-accent-layout-item"] {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 0 !important;
+          border-radius: inherit;
+        }
+        .card-content
+          > div
+          > .node-cardAccentLayoutItem
+          [data-layout-cut="behind"] {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+        }
+        .card-content
+          > div
+          > .node-cardAccentLayoutItem
+          [data-layout-cut="behind"]
+          img,
+        .card-content
+          > div
+          > .node-cardAccentLayoutItem
+          [data-layout-cut="behind"]
+          video {
+          display: block !important;
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+        }
+        .node-card img,
+        .node-card video,
+        .gml-card img {
+          max-width: 100% !important;
+          height: auto;
+          object-fit: contain;
         }
       }
     </style>

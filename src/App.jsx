@@ -359,6 +359,67 @@ export default function App() {
     const nav = doc.querySelector('[data-navbar-editor="true"]');
     const shell = nav?.parentElement;
     if (!shell) return;
+
+    const menu = nav.querySelector('[data-node-view-content-inner="navbar"]');
+    const header = nav.querySelector(".navbar-view-content");
+    if (menu && header && !header.querySelector(".indica-mobile-nav-toggle")) {
+      menu.id = "indica-mobile-navigation";
+      menu.setAttribute("aria-hidden", "true");
+
+      const toggle = doc.createElement("button");
+      toggle.type = "button";
+      toggle.className = "indica-mobile-nav-toggle";
+      toggle.setAttribute("aria-controls", menu.id);
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation menu");
+      for (let line = 0; line < 3; line += 1) {
+        toggle.append(doc.createElement("span"));
+      }
+
+      const logo = header.querySelector(":scope > a.chakra-link");
+      if (logo) logo.after(toggle);
+      else header.prepend(toggle);
+
+      const closeMenu = (restoreFocus = false) => {
+        nav.classList.remove("indica-mobile-menu-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation menu");
+        menu.setAttribute("aria-hidden", "true");
+        if (restoreFocus) toggle.focus();
+      };
+
+      toggle.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") !== "true";
+        nav.classList.toggle("indica-mobile-menu-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute(
+          "aria-label",
+          open ? "Close navigation menu" : "Open navigation menu",
+        );
+        menu.setAttribute("aria-hidden", String(!open));
+      });
+      menu.addEventListener("click", (event) => {
+        if (event.target.closest("a, button")) closeMenu();
+      });
+      doc.addEventListener("pointerdown", (event) => {
+        if (
+          nav.classList.contains("indica-mobile-menu-open") &&
+          !nav.contains(event.target)
+        )
+          closeMenu();
+      });
+      doc.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          nav.classList.contains("indica-mobile-menu-open")
+        )
+          closeMenu(true);
+      });
+      doc.defaultView?.addEventListener("resize", () => {
+        if (doc.defaultView.innerWidth > 704) closeMenu();
+      });
+    }
+
     for (const [property, value] of Object.entries({
       position: "fixed",
       top: "0",
