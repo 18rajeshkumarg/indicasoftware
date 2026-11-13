@@ -1,0 +1,712 @@
+{
+  "scope": "all_fetched_refs",
+  "complete_claimed": false,
+  "limitations": [
+    "Deleted/unfetched/unreachable history cannot be recovered from the clone."
+  ],
+  "shallow_clone": false,
+  "commits": [
+    {
+      "hash": "660f4462bb0718a9eb4671c342a493dbadf7a914",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-11-01 21:41:21 +0530",
+      "message": "Add Bing XML site verification file\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
+      "parents": [
+        "a3a34c2a3b646166795cd9198436a3eb3cc8754d"
+      ],
+      "refs": [
+        "HEAD -> main",
+        "origin/main",
+        "origin/HEAD"
+      ],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "a3a34c2a3b646166795cd9198436a3eb3cc8754d",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-11-01 21:38:13 +0530",
+      "message": "Add Bing Webmaster site verification\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
+      "parents": [
+        "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-11-01 21:14:13 +0530",
+      "message": "Improve search metadata and crawler discovery\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
+      "parents": [
+        "adbdbf1beda0718985619ef48948a0658c42301a"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "adbdbf1beda0718985619ef48948a0658c42301a",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 15:48:48 +0530",
+      "message": "Update inquiry notice and homepage welcome copy",
+      "parents": [
+        "a24af2284bd31f0a5e86675716222e325795e4e8"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "a24af2284bd31f0a5e86675716222e325795e4e8",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 15:10:27 +0530",
+      "message": "Add inquiry exports and editable about content",
+      "parents": [
+        "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 14:11:34 +0530",
+      "message": "Resize support chat panel for mobile screens",
+      "parents": [
+        "eef0a3eebc31d04cdce2c56efea1c3450d1828f2"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "eef0a3eebc31d04cdce2c56efea1c3450d1828f2",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 13:53:35 +0530",
+      "message": "Add SketricGen support chat widget",
+      "parents": [
+        "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 12:53:29 +0530",
+      "message": "fix: restore founder photo and About video playback",
+      "parents": [
+        "3382e8f87510fafd30d2d7cba79d5ab3171be377"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "3382e8f87510fafd30d2d7cba79d5ab3171be377",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 11:49:08 +0530",
+      "message": "fix: fit mobile images within viewport",
+      "parents": [
+        "29db8bd74f146c6e1b7f7909cdcfceb03219551d"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "29db8bd74f146c6e1b7f7909cdcfceb03219551d",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 11:24:51 +0530",
+      "message": "feat: add responsive mobile navigation and imagery",
+      "parents": [
+        "e5e8702f4c9d1417c758fb65161011c9e4a4d3f9"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "e5e8702f4c9d1417c758fb65161011c9e4a4d3f9",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 11:07:15 +0530",
+      "message": "chore: verify production site and responsive layouts",
+      "parents": [
+        "3d097ddc5a9afe7ad93140d8a80b57d3023c210b"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "3d097ddc5a9afe7ad93140d8a80b57d3023c210b",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-29 10:48:05 +0530",
+      "message": "fix: keep mobile about timeline within viewport",
+      "parents": [
+        "006558b54085ff66770af3b899a56948e45084af"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "006558b54085ff66770af3b899a56948e45084af",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-28 18:03:42 +0530",
+      "message": "fix: perfect 375px phone layout across all pages",
+      "parents": [
+        "b6d0a8021e88b4b6aa92916eafdf6fb883bf588f"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "b6d0a8021e88b4b6aa92916eafdf6fb883bf588f",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-28 16:39:49 +0530",
+      "message": "fix: complete site audit, responsive fixes, and asset repairs\n\nNormalize cross-folder links, fix the About social URL and contact link, vendor the missing KaTeX fonts, and make the vendor script path-independent. Improve FAQ and footer accessibility, keep tablet nav labels from truncating, remove empty review placeholders, and make review cards readable. Re-verify every page, link, image, route, and 25-device layout matrix.",
+      "parents": [
+        "717d65fef929fffbbb59dbd56be949d3a389730b"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "717d65fef929fffbbb59dbd56be949d3a389730b",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-28 14:31:10 +0530",
+      "message": "fix: eliminate console warnings and align navbar/footer\n\nRemove unused image preloads from every exported page, drop stale footer override styles, fix social-bubble focus handling, harden hash decoding and contact-form lookups, and reduce managed-content polling. Fix the dev API URL, keep mobile nav labels from clipping, and top-align footer columns with proper row/column gaps.",
+      "parents": [
+        "ba8652e42c84bd3fefee4c2b989de27f6b05ee27"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "ba8652e42c84bd3fefee4c2b989de27f6b05ee27",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-28 13:11:49 +0530",
+      "message": "fix: deploy built Vite site from GitHub Actions",
+      "parents": [
+        "987a4980e491066ed95423a971a37334cfc730f6"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "987a4980e491066ed95423a971a37334cfc730f6",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-17 13:20:27 +0530",
+      "message": "fix: apply prettier formatting to source and build scripts\n\n- Format src/app.css, src/SocialBubble.jsx, build-pages.mjs, fix-pages.mjs\n- Format package.json, package-lock.json\n- Build verified: vite build + copy-php.mjs succeeds\n- PHP lint: all backend files pass",
+      "parents": [
+        "3bc8da5b0fa0778134c947caf483211debee668e"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "3bc8da5b0fa0778134c947caf483211debee668e",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-11 15:04:58 +0530",
+      "message": "Add animated social media icon style to floating bubble",
+      "parents": [
+        "277e043eca87a6aa62b913cf3a1c868514305de2"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "277e043eca87a6aa62b913cf3a1c868514305de2",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-11 14:50:16 +0530",
+      "message": "Add floating social media bubble to every page",
+      "parents": [
+        "0fda195e9c270d2c28b3882bfbea29bb4d7e7f23"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "0fda195e9c270d2c28b3882bfbea29bb4d7e7f23",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-10 17:02:12 +0530",
+      "message": "Fix stale media 404 and heading/landmark semantics on exported pages\n\n- Remove the export's placeholder api/media.php?name=... images, which\n  404'd on static GitHub Pages (no PHP endpoint) on 12 pages.\n- Demote the extra <h1> section headings to <h2> so each page has a single\n  level-1 heading, pinning the original size via indica-h1-size so the\n  rendered design is unchanged at every breakpoint.\n- Mark the exported navbar div as a navigation landmark (role=navigation).\n- Extend fix-pages.mjs with the three steps (idempotent) and document them.",
+      "parents": [
+        "942468360d904595dbad2227db06eca2528c6131"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "942468360d904595dbad2227db06eca2528c6131",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-10 16:03:03 +0530",
+      "message": "Support older browsers, Smart TV browsers and JavaScript-less devices\n\n- build an ES5 + polyfilled legacy bundle (optional chaining/nullish\n  coalescing and modern built-ins broke older TV and phone engines)\n- add a <noscript> fallback so the content is reachable without JS\n- add longhand offsets and overflow-x:hidden fallbacks for engines\n  that do not understand inset/clip yet",
+      "parents": [
+        "9e5c902b86dcdd510d796b46c320c9c2f0318841"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "9e5c902b86dcdd510d796b46c320c9c2f0318841",
+      "author": "18rajeshkumarg",
+      "email": "329876001+18rajeshkumarg@users.noreply.github.com",
+      "date": "2026-10-10 14:26:27 +0530",
+      "message": "Fix mobile view: grow navbar so the logo is not clipped and stack smart-layout cards",
+      "parents": [
+        "32aa38ef332371c23b39eb58161e4eec8d0a4cf5"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "18rajeshkumarg",
+      "pr_author_username": "",
+      "author_identity_source": "git_email_alias"
+    },
+    {
+      "hash": "32aa38ef332371c23b39eb58161e4eec8d0a4cf5",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 13:22:57 +0530",
+      "message": "Improve mobile responsive layouts across pages",
+      "parents": [
+        "a140331b249be59fc8d5553344bdecbe3bde3955"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "a140331b249be59fc8d5553344bdecbe3bde3955",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 12:35:19 +0530",
+      "message": "Ensure Railway image includes root landing page",
+      "parents": [
+        "4d7dce0a0e28ed2dff6ffdc67a67615926943c41"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "4d7dce0a0e28ed2dff6ffdc67a67615926943c41",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 12:20:59 +0530",
+      "message": "Redirect PHP API root to admin sign-in",
+      "parents": [
+        "a499a3e30dcaec4b19b1f000acef4d4f4056dfc6"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "a499a3e30dcaec4b19b1f000acef4d4f4056dfc6",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 12:17:34 +0530",
+      "message": "Connect Pages build to Railway content API",
+      "parents": [
+        "1e32e0e93333ac6651085bd43eb728ea1f0e58b1"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "1e32e0e93333ac6651085bd43eb728ea1f0e58b1",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 12:13:47 +0530",
+      "message": "Merge pull request #3 from 18rajeshkumarg/railway/code-change-mYFL23\n\nEnforce single Apache MPM at container startup",
+      "parents": [
+        "d87638d6fd69b46565a45b1ae91230cd4094ace5",
+        "5c37f5898d7f2252e53a300eb4f479a806bf2bd0"
+      ],
+      "refs": [],
+      "is_merge": true,
+      "meaningful": "No",
+      "pr_number": 3,
+      "identity_source": "merge_message_branch_owner",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "18rajeshkumarg",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "5c37f5898d7f2252e53a300eb4f479a806bf2bd0",
+      "author": "",
+      "email": "68434857+railway-app[bot]@users.noreply.github.com",
+      "date": "2026-10-10 06:39:07 +0000",
+      "message": "fix: enforce single prefork MPM at runtime via docker/start.sh",
+      "parents": [
+        "d87638d6fd69b46565a45b1ae91230cd4094ace5"
+      ],
+      "refs": [
+        "origin/railway/code-change-mYFL23"
+      ],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "railway-app[bot]",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "d87638d6fd69b46565a45b1ae91230cd4094ace5",
+      "author": "",
+      "email": "68434857+railway-app[bot]@users.noreply.github.com",
+      "date": "2026-10-10 06:32:02 +0000",
+      "message": "fix: remove all mpm modules and enable only mpm_prefork in Dockerfile (#2)\n\nCo-authored-by: railway-app[bot] <68434857+railway-app[bot]@users.noreply.github.com>",
+      "parents": [
+        "93564cfdb20f6f09c7a724b13f67deace6d2fcdc"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "railway-app[bot]",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "116780179319a5488e3d24239a640d55c34d52b4",
+      "author": "",
+      "email": "68434857+railway-app[bot]@users.noreply.github.com",
+      "date": "2026-10-10 06:20:21 +0000",
+      "message": "fix: remove all mpm modules and enable only mpm_prefork in Dockerfile",
+      "parents": [
+        "93564cfdb20f6f09c7a724b13f67deace6d2fcdc"
+      ],
+      "refs": [
+        "origin/railway/fix-deploy-eacb4a"
+      ],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "railway-app[bot]",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "25d6a413d36a01e01d930db0c6794a351d61c629",
+      "author": "",
+      "email": "68434857+railway-app[bot]@users.noreply.github.com",
+      "date": "2026-10-10 06:19:39 +0000",
+      "message": "fix: ensure only mpm_prefork is enabled in Dockerfile",
+      "parents": [
+        "93564cfdb20f6f09c7a724b13f67deace6d2fcdc"
+      ],
+      "refs": [
+        "origin/railway/code-change-TMuspy"
+      ],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "railway-app[bot]",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "93564cfdb20f6f09c7a724b13f67deace6d2fcdc",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 11:32:21 +0530",
+      "message": "Default PHP storage path for Railway",
+      "parents": [
+        "b6ff7d555f6e862d18c41aee5cbfa697846cb911"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "b6ff7d555f6e862d18c41aee5cbfa697846cb911",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 11:16:17 +0530",
+      "message": "Ensure Apache starts with only prefork MPM",
+      "parents": [
+        "a295b5d383920ce474782ce35f15c9a3b6dbe3c5"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "a295b5d383920ce474782ce35f15c9a3b6dbe3c5",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 10:22:55 +0530",
+      "message": "Clear stale case study snapshots when API is unavailable",
+      "parents": [
+        "b833700ce458967c3449dfef22e4deff822e5d25"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "b833700ce458967c3449dfef22e4deff822e5d25",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 10:10:48 +0530",
+      "message": "Connect Pages frontend to Render PHP API",
+      "parents": [
+        "d9058abe3ec5a4926bd1b5193d4161eb6506dbf9"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "d9058abe3ec5a4926bd1b5193d4161eb6506dbf9",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 10:00:34 +0530",
+      "message": "Deploy Indica Software website",
+      "parents": [
+        "0158a311e7625a4a14934d1cc61ce84a81a0d5d1"
+      ],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    },
+    {
+      "hash": "0158a311e7625a4a14934d1cc61ce84a81a0d5d1",
+      "author": "",
+      "email": "rajesh.kumar.g44443@gmail.com",
+      "date": "2026-10-10 09:55:46 +0530",
+      "message": "Initial commit",
+      "parents": [],
+      "refs": [],
+      "is_merge": false,
+      "meaningful": "Yes",
+      "pr_number": "",
+      "identity_source": "git_author_only",
+      "author_name": "Rajesh Kumar G",
+      "pr_author_username": "",
+      "author_identity_source": "unresolved"
+    }
+  ],
+  "branches": [
+    {
+      "name": "main",
+      "sha": "660f4462bb0718a9eb4671c342a493dbadf7a914"
+    },
+    {
+      "name": "origin",
+      "sha": "660f4462bb0718a9eb4671c342a493dbadf7a914"
+    },
+    {
+      "name": "origin/main",
+      "sha": "660f4462bb0718a9eb4671c342a493dbadf7a914"
+    },
+    {
+      "name": "origin/railway/code-change-TMuspy",
+      "sha": "25d6a413d36a01e01d930db0c6794a351d61c629"
+    },
+    {
+      "name": "origin/railway/code-change-mYFL23",
+      "sha": "5c37f5898d7f2252e53a300eb4f479a806bf2bd0"
+    },
+    {
+      "name": "origin/railway/fix-deploy-eacb4a",
+      "sha": "116780179319a5488e3d24239a640d55c34d52b4"
+    }
+  ],
+  "tags": []
+}

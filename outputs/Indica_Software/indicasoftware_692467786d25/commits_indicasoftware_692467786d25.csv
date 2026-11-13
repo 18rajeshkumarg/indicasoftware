@@ -1,0 +1,71 @@
+hash,author,email,date,message,Meaningful
+660f4462bb0718a9eb4671c342a493dbadf7a914,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-11-01 21:41:21 +0530,"Add Bing XML site verification file
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",Yes
+a3a34c2a3b646166795cd9198436a3eb3cc8754d,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-11-01 21:38:13 +0530,"Add Bing Webmaster site verification
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",Yes
+e7035a218b9a96d67989a58e0b7e2c1e53fb6f66,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-11-01 21:14:13 +0530,"Improve search metadata and crawler discovery
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",Yes
+adbdbf1beda0718985619ef48948a0658c42301a,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 15:48:48 +0530,Update inquiry notice and homepage welcome copy,Yes
+a24af2284bd31f0a5e86675716222e325795e4e8,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 15:10:27 +0530,Add inquiry exports and editable about content,Yes
+8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 14:11:34 +0530,Resize support chat panel for mobile screens,Yes
+eef0a3eebc31d04cdce2c56efea1c3450d1828f2,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 13:53:35 +0530,Add SketricGen support chat widget,Yes
+3b5be0ac48ec1d7298b93893f5d18f9f4992a59a,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 12:53:29 +0530,fix: restore founder photo and About video playback,Yes
+3382e8f87510fafd30d2d7cba79d5ab3171be377,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 11:49:08 +0530,fix: fit mobile images within viewport,Yes
+29db8bd74f146c6e1b7f7909cdcfceb03219551d,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 11:24:51 +0530,feat: add responsive mobile navigation and imagery,Yes
+e5e8702f4c9d1417c758fb65161011c9e4a4d3f9,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 11:07:15 +0530,chore: verify production site and responsive layouts,Yes
+3d097ddc5a9afe7ad93140d8a80b57d3023c210b,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-29 10:48:05 +0530,fix: keep mobile about timeline within viewport,Yes
+006558b54085ff66770af3b899a56948e45084af,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-28 18:03:42 +0530,fix: perfect 375px phone layout across all pages,Yes
+b6d0a8021e88b4b6aa92916eafdf6fb883bf588f,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-28 16:39:49 +0530,"fix: complete site audit, responsive fixes, and asset repairs
+
+Normalize cross-folder links, fix the About social URL and contact link, vendor the missing KaTeX fonts, and make the vendor script path-independent. Improve FAQ and footer accessibility, keep tablet nav labels from truncating, remove empty review placeholders, and make review cards readable. Re-verify every page, link, image, route, and 25-device layout matrix.",Yes
+717d65fef929fffbbb59dbd56be949d3a389730b,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-28 14:31:10 +0530,"fix: eliminate console warnings and align navbar/footer
+
+Remove unused image preloads from every exported page, drop stale footer override styles, fix social-bubble focus handling, harden hash decoding and contact-form lookups, and reduce managed-content polling. Fix the dev API URL, keep mobile nav labels from clipping, and top-align footer columns with proper row/column gaps.",Yes
+ba8652e42c84bd3fefee4c2b989de27f6b05ee27,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-28 13:11:49 +0530,fix: deploy built Vite site from GitHub Actions,Yes
+987a4980e491066ed95423a971a37334cfc730f6,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-17 13:20:27 +0530,"fix: apply prettier formatting to source and build scripts
+
+- Format src/app.css, src/SocialBubble.jsx, build-pages.mjs, fix-pages.mjs
+- Format package.json, package-lock.json
+- Build verified: vite build + copy-php.mjs succeeds
+- PHP lint: all backend files pass",Yes
+3bc8da5b0fa0778134c947caf483211debee668e,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-11 15:04:58 +0530,Add animated social media icon style to floating bubble,Yes
+277e043eca87a6aa62b913cf3a1c868514305de2,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-11 14:50:16 +0530,Add floating social media bubble to every page,Yes
+0fda195e9c270d2c28b3882bfbea29bb4d7e7f23,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-10 17:02:12 +0530,"Fix stale media 404 and heading/landmark semantics on exported pages
+
+- Remove the export's placeholder api/media.php?name=... images, which
+  404'd on static GitHub Pages (no PHP endpoint) on 12 pages.
+- Demote the extra <h1> section headings to <h2> so each page has a single
+  level-1 heading, pinning the original size via indica-h1-size so the
+  rendered design is unchanged at every breakpoint.
+- Mark the exported navbar div as a navigation landmark (role=navigation).
+- Extend fix-pages.mjs with the three steps (idempotent) and document them.",Yes
+942468360d904595dbad2227db06eca2528c6131,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-10 16:03:03 +0530,"Support older browsers, Smart TV browsers and JavaScript-less devices
+
+- build an ES5 + polyfilled legacy bundle (optional chaining/nullish
+  coalescing and modern built-ins broke older TV and phone engines)
+- add a <noscript> fallback so the content is reachable without JS
+- add longhand offsets and overflow-x:hidden fallbacks for engines
+  that do not understand inset/clip yet",Yes
+9e5c902b86dcdd510d796b46c320c9c2f0318841,18rajeshkumarg,329876001+18rajeshkumarg@users.noreply.github.com,2026-10-10 14:26:27 +0530,Fix mobile view: grow navbar so the logo is not clipped and stack smart-layout cards,Yes
+32aa38ef332371c23b39eb58161e4eec8d0a4cf5,,rajesh.kumar.g44443@gmail.com,2026-10-10 13:22:57 +0530,Improve mobile responsive layouts across pages,Yes
+a140331b249be59fc8d5553344bdecbe3bde3955,,rajesh.kumar.g44443@gmail.com,2026-10-10 12:35:19 +0530,Ensure Railway image includes root landing page,Yes
+4d7dce0a0e28ed2dff6ffdc67a67615926943c41,,rajesh.kumar.g44443@gmail.com,2026-10-10 12:20:59 +0530,Redirect PHP API root to admin sign-in,Yes
+a499a3e30dcaec4b19b1f000acef4d4f4056dfc6,,rajesh.kumar.g44443@gmail.com,2026-10-10 12:17:34 +0530,Connect Pages build to Railway content API,Yes
+1e32e0e93333ac6651085bd43eb728ea1f0e58b1,,rajesh.kumar.g44443@gmail.com,2026-10-10 12:13:47 +0530,"Merge pull request #3 from 18rajeshkumarg/railway/code-change-mYFL23
+
+Enforce single Apache MPM at container startup",No
+5c37f5898d7f2252e53a300eb4f479a806bf2bd0,,68434857+railway-app[bot]@users.noreply.github.com,2026-10-10 06:39:07 +0000,fix: enforce single prefork MPM at runtime via docker/start.sh,Yes
+d87638d6fd69b46565a45b1ae91230cd4094ace5,,68434857+railway-app[bot]@users.noreply.github.com,2026-10-10 06:32:02 +0000,"fix: remove all mpm modules and enable only mpm_prefork in Dockerfile (#2)
+
+Co-authored-by: railway-app[bot] <68434857+railway-app[bot]@users.noreply.github.com>",Yes
+116780179319a5488e3d24239a640d55c34d52b4,,68434857+railway-app[bot]@users.noreply.github.com,2026-10-10 06:20:21 +0000,fix: remove all mpm modules and enable only mpm_prefork in Dockerfile,Yes
+25d6a413d36a01e01d930db0c6794a351d61c629,,68434857+railway-app[bot]@users.noreply.github.com,2026-10-10 06:19:39 +0000,fix: ensure only mpm_prefork is enabled in Dockerfile,Yes
+93564cfdb20f6f09c7a724b13f67deace6d2fcdc,,rajesh.kumar.g44443@gmail.com,2026-10-10 11:32:21 +0530,Default PHP storage path for Railway,Yes
+b6ff7d555f6e862d18c41aee5cbfa697846cb911,,rajesh.kumar.g44443@gmail.com,2026-10-10 11:16:17 +0530,Ensure Apache starts with only prefork MPM,Yes
+a295b5d383920ce474782ce35f15c9a3b6dbe3c5,,rajesh.kumar.g44443@gmail.com,2026-10-10 10:22:55 +0530,Clear stale case study snapshots when API is unavailable,Yes
+b833700ce458967c3449dfef22e4deff822e5d25,,rajesh.kumar.g44443@gmail.com,2026-10-10 10:10:48 +0530,Connect Pages frontend to Render PHP API,Yes
+d9058abe3ec5a4926bd1b5193d4161eb6506dbf9,,rajesh.kumar.g44443@gmail.com,2026-10-10 10:00:34 +0530,Deploy Indica Software website,Yes
+0158a311e7625a4a14934d1cc61ce84a81a0d5d1,,rajesh.kumar.g44443@gmail.com,2026-10-10 09:55:46 +0530,Initial commit,Yes

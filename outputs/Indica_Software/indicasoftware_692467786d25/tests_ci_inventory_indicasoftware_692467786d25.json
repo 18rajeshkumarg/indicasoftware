@@ -1,0 +1,10 @@
+{
+  "test_files": [],
+  "ci_configuration_files": [
+    ".github/workflows/pages.yml"
+  ],
+  "retained_test_or_coverage_reports": [],
+  "retained_test_report_summaries": [],
+  "test_execution_performed": false,
+  "ci_results_source": "provider_api_when_available"
+}

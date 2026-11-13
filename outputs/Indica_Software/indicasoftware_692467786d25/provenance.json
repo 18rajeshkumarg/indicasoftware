@@ -1,0 +1,1100 @@
+{
+  "schema_version": 3,
+  "generated_at": "2026-11-13T10:06:01.498434+00:00",
+  "status": "PUBLIC_EXPOSURE_EVIDENCE",
+  "recommendation": "REJECT",
+  "ever_public": true,
+  "public_to_private_transition": null,
+  "always_private_verified": false,
+  "repository": {
+    "is_git_root": true,
+    "target": "https://github.com/18rajeshkumarg/indicasoftware.git",
+    "remotes": [
+      {
+        "name": "origin",
+        "url": "https://github.com/18rajeshkumarg/indicasoftware.git"
+      }
+    ],
+    "github_name": "18rajeshkumarg/indicasoftware",
+    "head": "660f4462bb0718a9eb4671c342a493dbadf7a914",
+    "reachable_commit_count": 37,
+    "history_readable": true,
+    "shallow": false,
+    "replace_refs_present": false,
+    "grafts_present": false,
+    "repository_id": 1412747107,
+    "provider": "github",
+    "instance_url": "https://github.com",
+    "repository_name": "18rajeshkumarg/indicasoftware"
+  },
+  "provider_metadata": {
+    "available": true,
+    "provider": "github",
+    "repository_id": 1412747107,
+    "full_name": "18rajeshkumarg/indicasoftware",
+    "is_private": false,
+    "visibility": "public",
+    "is_fork": false,
+    "created_at": "2026-10-10T04:25:44Z",
+    "pushed_at": "2026-11-01T16:11:24Z",
+    "default_branch": "main",
+    "stars": 0,
+    "forks": 0,
+    "open_issues": 1,
+    "subscribers": 0,
+    "description": "Company: Indica Software",
+    "language": "HTML",
+    "size_kb": 3225,
+    "license": "MIT",
+    "owner": "18rajeshkumarg",
+    "owner_type": "User",
+    "topics": []
+  },
+  "evidence": [
+    {
+      "kind": "currently_public",
+      "source": "github_anonymous_api",
+      "strength": "confirmed",
+      "timestamp": "2026-11-13T10:06:01.498434+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-11-01T16:11:25+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "26020059611",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-11-01T16:11:25+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "660f4462bb0718a9eb4671c342a493dbadf7a914",
+        "a3a34c2a3b646166795cd9198436a3eb3cc8754d"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-11-01T16:08:18+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "26019842682",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-11-01T16:08:18+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "a3a34c2a3b646166795cd9198436a3eb3cc8754d",
+        "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-11-01T15:44:17+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25984627267",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-11-01T15:44:17+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "adbdbf1beda0718985619ef48948a0658c42301a",
+        "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T10:18:52+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25736752221",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T10:18:52+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "a24af2284bd31f0a5e86675716222e325795e4e8",
+        "adbdbf1beda0718985619ef48948a0658c42301a"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T08:23:37+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25637351375",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T08:23:37+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a",
+        "eef0a3eebc31d04cdce2c56efea1c3450d1828f2"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T07:23:31+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25636821941",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T07:23:31+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "3382e8f87510fafd30d2d7cba79d5ab3171be377",
+        "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T09:40:32+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25625932981",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T09:40:32+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d",
+        "a24af2284bd31f0a5e86675716222e325795e4e8"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T08:41:36+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25613740332",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T08:41:36+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d",
+        "eef0a3eebc31d04cdce2c56efea1c3450d1828f2"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T06:19:11+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25603132322",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T06:19:11+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "29db8bd74f146c6e1b7f7909cdcfceb03219551d",
+        "3382e8f87510fafd30d2d7cba79d5ab3171be377"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T05:54:55+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25601622938",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T05:54:55+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "29db8bd74f146c6e1b7f7909cdcfceb03219551d",
+        "e5e8702f4c9d1417c758fb65161011c9e4a4d3f9"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T05:37:17+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25596464698",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T05:37:17+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "3d097ddc5a9afe7ad93140d8a80b57d3023c210b",
+        "e5e8702f4c9d1417c758fb65161011c9e4a4d3f9"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-29T05:18:12+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25596415432",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-29T05:18:12+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "006558b54085ff66770af3b899a56948e45084af",
+        "3d097ddc5a9afe7ad93140d8a80b57d3023c210b"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-28T07:41:51+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25578273743",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-28T07:41:51+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "987a4980e491066ed95423a971a37334cfc730f6",
+        "ba8652e42c84bd3fefee4c2b989de27f6b05ee27"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-28T12:33:45+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25504991620",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-28T12:33:45+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "006558b54085ff66770af3b899a56948e45084af",
+        "b6d0a8021e88b4b6aa92916eafdf6fb883bf588f"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-28T11:10:00+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25492660229",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-28T11:10:00+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "717d65fef929fffbbb59dbd56be949d3a389730b",
+        "b6d0a8021e88b4b6aa92916eafdf6fb883bf588f"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-28T09:01:18+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "25483590004",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-28T09:01:18+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "717d65fef929fffbbb59dbd56be949d3a389730b",
+        "ba8652e42c84bd3fefee4c2b989de27f6b05ee27"
+      ],
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-10T04:25:44+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PublicEvent",
+      "event_id": "18360253981",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-10T04:25:44+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PublicEvent",
+      "event_id": "18307400104",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-10T04:25:44+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PublicEvent",
+      "event_id": "18307084020",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "historical_public_repository",
+      "source": "github_recent_events",
+      "strength": "confirmed",
+      "timestamp": "2026-10-17T07:50:35+00:00",
+      "repository_id": 1412747107,
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "identity_match": "repository_id",
+      "event_type": "PushEvent",
+      "event_id": "24474465628",
+      "previous_visibility": null,
+      "visibility": null,
+      "independently_fetched": true
+    },
+    {
+      "kind": "public_commit_match",
+      "source": "github_recent_events",
+      "strength": "code_match",
+      "timestamp": "2026-10-17T07:50:35+00:00",
+      "repository_name": "18rajeshkumarg/indicasoftware",
+      "repository_id": 1412747107,
+      "shas": [
+        "3bc8da5b0fa0778134c947caf483211debee668e",
+        "987a4980e491066ed95423a971a37334cfc730f6"
+      ],
+      "independently_fetched": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "github_repository_metadata",
+      "status": 200
+    },
+    {
+      "check": "github_anonymous_visibility",
+      "status": 200
+    },
+    {
+      "check": "github_recent_events",
+      "status": "bounded_window",
+      "records": 20
+    }
+  ],
+  "public_exposure_estimate": {
+    "status": "ESTIMATE",
+    "label": "Heuristic estimate, not a confirmed finding",
+    "model_version": "public-origin-heuristic-v1",
+    "likelihood_percent": 99,
+    "is_calibrated_probability": false,
+    "audit": {
+      "available": false,
+      "reason": "audit_not_requested",
+      "checks": []
+    },
+    "formula": "min(99, sum(group_points)); strongest signal per group, engagement sums up to 6",
+    "group_caps": {
+      "public_trace": 95,
+      "relationship": 8,
+      "engagement": 6,
+      "documentation": 6,
+      "history": 4,
+      "context": 0
+    },
+    "group_points": {
+      "public_trace": 95,
+      "relationship": 0,
+      "engagement": 0,
+      "documentation": 4,
+      "history": 0,
+      "context": 0
+    },
+    "uncapped_points": 99,
+    "cap_adjustment_points": 0,
+    "coverage": {
+      "observed_scored_signals": 13,
+      "total_scored_signals": 14,
+      "unavailable_signals": [
+        "supplied_reference_match",
+        "clone_history"
+      ]
+    },
+    "signals": [
+      {
+        "signal": "current_public_visibility",
+        "group": "public_trace",
+        "weight": 95,
+        "status": "detected",
+        "value": "public",
+        "source": "provider_metadata",
+        "explanation": "Current public access strongly indicates exposure; current private access says nothing about the past.",
+        "raw_points": 95,
+        "contribution_points": 95
+      },
+      {
+        "signal": "historical_public_trace",
+        "group": "public_trace",
+        "weight": 85,
+        "status": "detected",
+        "value": [
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-11-01T16:11:25+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "26020059611",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-11-01T16:08:18+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "26019842682",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-11-01T15:44:17+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25984627267",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T10:18:52+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25736752221",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T08:23:37+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25637351375",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T07:23:31+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25636821941",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T09:40:32+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25625932981",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T08:41:36+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25613740332",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T06:19:11+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25603132322",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          },
+          {
+            "kind": "historical_public_repository",
+            "source": "github_recent_events",
+            "strength": "confirmed",
+            "timestamp": "2026-10-29T05:54:55+00:00",
+            "repository_id": 1412747107,
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "identity_match": "repository_id",
+            "event_type": "PushEvent",
+            "event_id": "25601622938",
+            "previous_visibility": null,
+            "visibility": null,
+            "independently_fetched": true
+          }
+        ],
+        "source": "provenance_evidence",
+        "explanation": "Historical public records are strong leads; name-only matches can refer to a reused name.",
+        "raw_points": 85,
+        "contribution_points": 0
+      },
+      {
+        "signal": "public_commit_match",
+        "group": "public_trace",
+        "weight": 75,
+        "status": "detected",
+        "value": [
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-11-01T16:11:25+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "660f4462bb0718a9eb4671c342a493dbadf7a914",
+              "a3a34c2a3b646166795cd9198436a3eb3cc8754d"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-11-01T16:08:18+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "a3a34c2a3b646166795cd9198436a3eb3cc8754d",
+              "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-11-01T15:44:17+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "adbdbf1beda0718985619ef48948a0658c42301a",
+              "e7035a218b9a96d67989a58e0b7e2c1e53fb6f66"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T10:18:52+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "a24af2284bd31f0a5e86675716222e325795e4e8",
+              "adbdbf1beda0718985619ef48948a0658c42301a"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T08:23:37+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a",
+              "eef0a3eebc31d04cdce2c56efea1c3450d1828f2"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T07:23:31+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "3382e8f87510fafd30d2d7cba79d5ab3171be377",
+              "3b5be0ac48ec1d7298b93893f5d18f9f4992a59a"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T09:40:32+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d",
+              "a24af2284bd31f0a5e86675716222e325795e4e8"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T08:41:36+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "8cb1d17c6b1daf27713fd29ea9fa3bc42f38917d",
+              "eef0a3eebc31d04cdce2c56efea1c3450d1828f2"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T06:19:11+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "29db8bd74f146c6e1b7f7909cdcfceb03219551d",
+              "3382e8f87510fafd30d2d7cba79d5ab3171be377"
+            ],
+            "independently_fetched": true
+          },
+          {
+            "kind": "public_commit_match",
+            "source": "github_recent_events",
+            "strength": "code_match",
+            "timestamp": "2026-10-29T05:54:55+00:00",
+            "repository_name": "18rajeshkumarg/indicasoftware",
+            "repository_id": 1412747107,
+            "shas": [
+              "29db8bd74f146c6e1b7f7909cdcfceb03219551d",
+              "e5e8702f4c9d1417c758fb65161011c9e4a4d3f9"
+            ],
+            "independently_fetched": true
+          }
+        ],
+        "source": "provenance_evidence",
+        "explanation": "An exact public commit match may be shared dependency/template history, not publication of this repository.",
+        "raw_points": 75,
+        "contribution_points": 0
+      },
+      {
+        "signal": "public_fork_ancestry",
+        "group": "public_trace",
+        "weight": 60,
+        "status": "not_detected",
+        "value": [],
+        "source": "provenance_evidence",
+        "explanation": "A provider-reported public ancestor indicates public-origin code, not a visibility transition.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "supplied_reference_match",
+        "group": "public_trace",
+        "weight": 35,
+        "status": "unavailable",
+        "value": [],
+        "source": "provenance_evidence",
+        "explanation": "A matching supplied mirror/reference needs independent verification of its public origin.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "fork_relationship",
+        "group": "relationship",
+        "weight": 8,
+        "status": "not_detected",
+        "value": false,
+        "source": "provider_metadata",
+        "explanation": "Private forks are possible, so a fork relationship alone is a weak indicator.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "stars",
+        "group": "engagement",
+        "weight": 2,
+        "status": "not_detected",
+        "value": 0,
+        "source": "provider_metadata",
+        "explanation": "Nonzero engagement is weak: private repositories also have collaborators and forks.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "subscribers",
+        "group": "engagement",
+        "weight": 1,
+        "status": "not_detected",
+        "value": 0,
+        "source": "provider_metadata",
+        "explanation": "Nonzero engagement is weak: private repositories also have collaborators and forks.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "forks",
+        "group": "engagement",
+        "weight": 3,
+        "status": "not_detected",
+        "value": 0,
+        "source": "provider_metadata",
+        "explanation": "Nonzero engagement is weak: private repositories also have collaborators and forks.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "upstream_links_or_remotes",
+        "group": "documentation",
+        "weight": 3,
+        "status": "not_detected",
+        "value": [],
+        "source": "local_git_and_files",
+        "explanation": "Links and extra remotes suggest possible upstreams; they do not verify a public mirror.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "deleted_license",
+        "group": "documentation",
+        "weight": 6,
+        "status": "not_detected",
+        "value": [],
+        "source": "local_git",
+        "explanation": "License removal may be routine maintenance; it is only a weak provenance lead.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "open_source_license_artifact",
+        "group": "documentation",
+        "weight": 4,
+        "status": "detected",
+        "value": [
+          "LICENSE"
+        ],
+        "source": "local_files",
+        "explanation": "An open-source license artifact may cover third-party material in a private project.",
+        "raw_points": 4,
+        "contribution_points": 4
+      },
+      {
+        "signal": "deleted_readme",
+        "group": "documentation",
+        "weight": 2,
+        "status": "not_detected",
+        "value": null,
+        "source": "local_git",
+        "explanation": "README deletions can hide attribution but are also ordinary documentation maintenance.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "large_tree_short_history",
+        "group": "history",
+        "weight": 4,
+        "status": "not_detected",
+        "value": {
+          "source_files": 10,
+          "commits": 37
+        },
+        "source": "local_git",
+        "explanation": "At least 100 tracked source files with 1-5 commits can indicate an import or squash; it is not proof of scrubbing.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "contributor_metadata",
+        "group": "context",
+        "weight": 0,
+        "status": "detected",
+        "value": {
+          "distinct_author_emails_in_sample": 3,
+          "sample_limit": 1000
+        },
+        "source": "local_git",
+        "explanation": "Contributor counts and personal email domains do not establish public origin; no points are assigned.",
+        "raw_points": 0,
+        "contribution_points": 0
+      },
+      {
+        "signal": "clone_history",
+        "group": "context",
+        "weight": 0,
+        "status": "unavailable",
+        "value": null,
+        "source": "not_collected",
+        "explanation": "A clone does not retain earlier server visibility or other clones. Restricted traffic data is not lifetime history.",
+        "raw_points": 0,
+        "contribution_points": 0
+      }
+    ],
+    "limitations": [
+      "Weights are assumptions without empirical calibration; this percentage is an exposure index, not a statistical probability.",
+      "0% means no weighted indicators observed, not a 0% chance of past publication. Missing signals never clear a repository.",
+      "Public-origin code, a public ancestor, and publication of this exact repository are different claims.",
+      "No global mirror/web search is performed; public traces depend on existing evidence and optional commit search.",
+      "Local history and attribution may be incomplete or edited; absence of findings cannot verify privacy."
+    ]
+  },
+  "evidence_sources": [],
+  "public_references": [],
+  "limitations": [
+    "No search or audit-log window can prove a repository was always private.",
+    "Git dates, authors, remotes and local evidence files can be edited or fabricated.",
+    "Deleted repositories, detached forks, renames, transfers and rewritten history can hide origins.",
+    "A shared commit/file can be a dependency or template; it does not establish ownership or copying direction.",
+    "Imported records and reference repositories require independent verification of their source.",
+    "Recent GitHub events are a bounded feed, not a lifetime visibility history."
+  ],
+  "next_steps": [
+    "Independently verify cited event IDs, repository IDs, timestamps and imported evidence sources.",
+    "Obtain prior repository names/owners/providers and archived visibility/audit records from the vendor.",
+    "Search GH Archive across the full repository lifetime and compare suspected public ancestors locally.",
+    "Have a reviewer assess shared dependencies/templates and ownership before purchase."
+  ]
+}

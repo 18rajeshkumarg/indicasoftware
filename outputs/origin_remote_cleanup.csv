@@ -1,0 +1,2 @@
+timestamp_utc,repository_name,source_type,repository_target,local_path,origin_present,origin_removed,status,error
+2026-11-13T10:06:04.295460+00:00,indicasoftware_692467786d25,existing_clone,https://github.com/18rajeshkumarg/indicasoftware.git,D:\Indica Software Complete Project\Indica Software\cloned_repos\Indica_Software\indicasoftware_692467786d25,True,False,preserved,

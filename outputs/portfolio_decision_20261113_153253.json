@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-11-13T15:32:53",
+  "decision": "MANUAL_REVIEW",
+  "projects": [
+    {
+      "project_name": "Indica Software",
+      "decision": "MANUAL_REVIEW",
+      "repositories_declared": 1,
+      "repositories_analyzed": 1,
+      "project_checks": [
+        {
+          "rule_id": "merged_prs_and_commits_same_repository",
+          "status": "UNKNOWN",
+          "expected": "merged PRs >= 100 AND commits >= 100",
+          "actual": [],
+          "reason": "No repository could be verified as satisfying this rule"
+        },
+        {
+          "rule_id": "minimum_eligible_source_loc",
+          "status": "UNKNOWN",
+          "expected": ">= 5000",
+          "actual": [],
+          "reason": "No repository could be verified as satisfying this rule"
+        },
+        {
+          "rule_id": "minimum_development_span_months",
+          "status": "UNKNOWN",
+          "expected": ">= 6 months",
+          "actual": [],
+          "reason": "No repository could be verified as satisfying this rule"
+        }
+      ],
+      "repository_results": [
+        {
+          "name": "indicasoftware",
+          "target": "https://github.com/18rajeshkumarg/indicasoftware.git",
+          "branch": "main",
+          "decision": "ANALYSIS_ERROR",
+          "metrics": {},
+          "checks": [],
+          "error": "Repository analysis did not complete"
+        }
+      ]
+    }
+  ]
+}

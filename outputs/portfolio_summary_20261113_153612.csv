@@ -1,0 +1,2 @@
+﻿project_name,project_decision,repository_name,repository_decision,failed_rules,unknown_rules
+Indica Software,REJECT,indicasoftware,REJECT,private_repository | private_provenance | no_detected_license,

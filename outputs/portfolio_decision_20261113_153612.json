@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-11-13T15:36:12",
+  "decision": "REJECT",
+  "projects": [
+    {
+      "project_name": "Indica Software",
+      "decision": "REJECT",
+      "repositories_declared": 1,
+      "repositories_analyzed": 1,
+      "project_checks": [
+        {
+          "rule_id": "merged_prs_and_commits_same_repository",
+          "status": "UNKNOWN",
+          "expected": "merged PRs >= 100 AND commits >= 100",
+          "actual": [],
+          "reason": "No repository could be verified as satisfying this rule"
+        },
+        {
+          "rule_id": "minimum_eligible_source_loc",
+          "status": "PASS",
+          "expected": ">= 5000",
+          "actual": 356119,
+          "reason": "Satisfied by indicasoftware",
+          "satisfied_by": "indicasoftware"
+        },
+        {
+          "rule_id": "minimum_development_span_months",
+          "status": "FAIL",
+          "expected": ">= 6 months",
+          "actual": [
+            1
+          ],
+          "reason": "No repository could be verified as satisfying this rule"
+        }
+      ],
+      "repository_results": [
+        {
+          "name": "indicasoftware",
+          "target": "https://github.com/18rajeshkumarg/indicasoftware.git",
+          "branch": "main",
+          "report_file": "outputs\\Indica_Software\\indicasoftware_692467786d25\\indicasoftware_692467786d25_report.json",
+          "metrics": {
+            "repository_name": "indicasoftware",
+            "repository_key": "indicasoftware_692467786d25",
+            "target_path": "D:\\Indica Software Complete Project\\Indica Software\\cloned_repos\\Indica_Software\\indicasoftware_692467786d25",
+            "is_private": false,
+            "visibility_available": true,
+            "visibility_reason": null,
+            "provenance_status": "PUBLIC_EXPOSURE_EVIDENCE",
+            "provenance_ever_public": true,
+            "provenance_recommendation": "REJECT",
+            "public_exposure_estimate_percent": 99,
+            "public_exposure_estimate_status": "ESTIMATE",
+            "license_detection_available": true,
+            "license_detected": true,
+            "license_file": "LICENSE",
+            "license_type": "Mit License",
+            "readme_name": "README.md",
+            "readme_characters": 15427,
+            "git_available": true,
+            "default_branch": "main",
+            "analysis_branch": "main",
+            "branch_selection_source": "requested",
+            "git_history_intact": true,
+            "eligible_source_file_count": 42,
+            "human_contributor_count": 2,
+            "merged_pr_count": null,
+            "pr_analysis_available": false,
+            "pr_velocity_profile": null,
+            "blacklist_status": null,
+            "commit_count": 35,
+            "eligible_source_loc": 356119,
+            "development_span_months": 1
+          },
+          "decision": "REJECT",
+          "checks": [
+            {
+              "rule_id": "private_repository",
+              "status": "FAIL",
+              "expected": "private",
+              "actual": false,
+              "reason": "Repository visibility must be verified as private"
+            },
+            {
+              "rule_id": "private_provenance",
+              "status": "FAIL",
+              "expected": "independently reviewed private provenance",
+              "actual": "PUBLIC_EXPOSURE_EVIDENCE",
+              "reason": "Public-exposure evidence found"
+            },
+            {
+              "rule_id": "no_detected_license",
+              "status": "FAIL",
+              "expected": "no license detected",
+              "actual": {
+                "detected": true,
+                "file": "LICENSE",
+                "type": "Mit License"
+              },
+              "reason": "Any detected license makes the repository ineligible"
+            },
+            {
+              "rule_id": "valid_root_readme",
+              "status": "PASS",
+              "expected": ">= 200 characters",
+              "actual": 15427,
+              "reason": "A meaningful README is required at repository root"
+            },
+            {
+              "rule_id": "git_history_intact",
+              "status": "PASS",
+              "expected": "true",
+              "actual": true,
+              "reason": "Git history must be intact"
+            },
+            {
+              "rule_id": "eligible_source_files",
+              "status": "PASS",
+              "expected": ">= 20",
+              "actual": 42,
+              "reason": "Minimum eligible source-file count"
+            },
+            {
+              "rule_id": "human_contributors",
+              "status": "PASS",
+              "expected": ">= 2",
+              "actual": 2,
+              "reason": "Minimum unique human contributors"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
